@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".auth.fragments.SignUpInitialFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#000000"
+            android:layout_weight="1">
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#DDDDDD"
+            android:layout_weight="1">
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/transparent"
+        android:padding="15dp"
+        android:id="@+id/back"
+        android:src="@drawable/back"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Student"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:paddingTop="15dp"
+        android:gravity="center"
+        android:textSize="23sp"
+        android:layout_toEndOf="@+id/back"
+        android:layout_marginStart="20dp"
+        android:layout_alignParentTop="true" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:paddingTop="15dp"
+        android:gravity="center"
+        android:textSize="23sp"
+        android:layout_toEndOf="@+id/back"
+        android:layout_marginStart="30dp"
+        android:layout_alignParentTop="true" />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:id="@+id/student"
+        android:layout_centerInParent="true">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#FFFFFF"
+            android:layout_margin="4dp"
+            app:cardCornerRadius="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:hint="First name"
+                    android:singleLine="true"
+                    android:inputType="textPersonName"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="15dp"/>
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:hint="Last name"
+                    android:singleLine="true"
+                    android:inputType="textPersonName"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:singleLine="true"
+                    android:hint="Matric number"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:hint="Level"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:singleLine="true"
+                    android:hint="Faculty"
+                    android:inputType="text"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:hint="Department"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"/>
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center"
+                    app:cardBackgroundColor="#000000"
+                    android:id="@+id/next"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Next"
+                        android:textColor="#FFFFFF"
+                        android:layout_gravity="center"
+                        android:textSize="15sp"/>
+
+                </android.support.v7.widget.CardView>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:id="@+id/ind_supervisor"
+        android:visibility="gone"
+        android:layout_centerInParent="true">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#FFFFFF"
+            android:layout_margin="4dp"
+            app:cardCornerRadius="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:hint="First name"
+                    android:singleLine="true"
+                    android:inputType="textPersonName"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="15dp"/>
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:hint="Last name"
+                    android:singleLine="true"
+                    android:inputType="textPersonName"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:hint="Email"
+                    android:singleLine="true"
+                    android:inputType="textEmailAddress"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:hint="Phone number"
+                    android:singleLine="true"
+                    android:inputType="phone"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:hint="Rank"
+                    android:singleLine="true"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:hint="Staff ID"
+                    android:singleLine="true"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"/>
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center"
+                    app:cardBackgroundColor="#000000"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Next"
+                        android:textColor="#FFFFFF"
+                        android:layout_gravity="center"
+                        android:textSize="15sp"/>
+
+                </android.support.v7.widget.CardView>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:id="@+id/dept_supervisor"
+        android:visibility="gone"
+        android:layout_centerInParent="true">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#FFFFFF"
+            android:layout_margin="4dp"
+            app:cardCornerRadius="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:hint="First name"
+                    android:singleLine="true"
+                    android:inputType="textPersonName"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="15dp"/>
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:hint="Last name"
+                    android:singleLine="true"
+                    android:inputType="textPersonName"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:hint="Email"
+                    android:singleLine="true"
+                    android:inputType="textEmailAddress"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:singleLine="true"
+                    android:hint="Faculty"
+                    android:textSize="15sp"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:hint="Department"
+                    android:textSize="15sp"
+                    android:singleLine="true"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"/>
+
+                <EditText
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:hint="Staff ID"
+                    android:textSize="15sp"
+                    android:singleLine="true"
+                    android:padding="7dp"
+                    android:layout_marginTop="10dp"/>
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center"
+                    app:cardBackgroundColor="#000000"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Next"
+                        android:textColor="#FFFFFF"
+                        android:layout_gravity="center"
+                        android:textSize="15sp"/>
+
+                </android.support.v7.widget.CardView>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </FrameLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Electronic Logbook</string>
+
+    <string-array name="sign_up_as">
+        <item>Sign up as</item>
+        <item>Student</item>
+        <item>Department supervisor</item>
+        <item>Industrial supervisor</item>
+    </string-array>
+
+</resources>

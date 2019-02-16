@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "228787396060",
+    "firebase_url": "https://electroniclogbook-6b229.firebaseio.com",
+    "project_id": "electroniclogbook-6b229",
+    "storage_bucket": "electroniclogbook-6b229.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228787396060:android:e63f5454c3b7cae4",
+        "android_client_info": {
+          "package_name": "com.dabinu.app.electroniclogbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "228787396060-d7nqcgrrjhcktunos41q9r3go45as3kr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dabinu.app.electroniclogbook",
+            "certificate_hash": "d24abb2ea768eb04b7e62741dc5958314f13b7c8"
+          }
+        },
+        {
+          "client_id": "228787396060-1g1k3ie2n9vckof4bhhn68ikpok0eern.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk_j4gDzxlXwsIjW3Fj-McZulMFr2cqVo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "228787396060-1g1k3ie2n9vckof4bhhn68ikpok0eern.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
