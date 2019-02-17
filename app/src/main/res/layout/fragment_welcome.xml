@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#DDDDDD"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".splash.fragments.WelcomeFragment">
+    tools:context=".auth.fragments.WelcomeFragment">
 
     <TextView
         android:layout_width="wrap_content"

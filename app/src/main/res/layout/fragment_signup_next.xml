@@ -66,13 +66,13 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:layout_width="170dp"
-                    android:layout_height="170dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:layout_gravity="center"
                     android:id="@+id/image"
                     android:src="@drawable/camera"
-                    android:scaleType="fitCenter"
-                    android:padding="50dp"
+                    android:scaleType="centerCrop"
+                    android:padding="30dp"
                     android:background="#DDDDDD"
                     android:layout_marginTop="12dp"/>
 

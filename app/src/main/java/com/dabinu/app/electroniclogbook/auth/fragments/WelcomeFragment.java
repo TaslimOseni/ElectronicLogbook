@@ -1,6 +1,8 @@
-package com.dabinu.app.electroniclogbook.splash.fragments;
+package com.dabinu.app.electroniclogbook.auth.fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -10,14 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dabinu.app.electroniclogbook.R;
+import com.dabinu.app.electroniclogbook.auth.AuthActivity;
 import com.dabinu.app.electroniclogbook.auth.fragments.LoginFragment;
 import com.dabinu.app.electroniclogbook.auth.fragments.SignUpAsFragment;
+import com.dabinu.app.electroniclogbook.exit.ExitActivity;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WelcomeFragment extends Fragment{
+public class WelcomeFragment extends Fragment implements AuthActivity.IOnBackPressed{
 
     CardView loginCard, signupCard;
 
@@ -53,4 +57,21 @@ public class WelcomeFragment extends Fragment{
         return view;
     }
 
+
+    @Override
+    public boolean onBackPressed(){
+        new AlertDialog.Builder(getActivity())
+                .setMessage("Exit?")
+                .setCancelable(true)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ExitActivity.exit(getActivity().getApplicationContext());
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+        return true;
+
+    }
 }

@@ -8,11 +8,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +25,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.dabinu.app.electroniclogbook.R;
+import com.dabinu.app.electroniclogbook.auth.AuthActivity;
 import com.dabinu.app.electroniclogbook.landing.LandingActivity;
 import com.dabinu.app.electroniclogbook.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,7 +44,7 @@ import com.google.firebase.storage.UploadTask;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SignupNextFragment extends Fragment{
+public class SignupNextFragment extends Fragment implements AuthActivity.IOnBackPressed{
 
     ImageButton image;
     EditText password1, password2;
@@ -98,98 +102,111 @@ public class SignupNextFragment extends Fragment{
         password2 = view.findViewById(R.id.password2);
 
         signup = view.findViewById(R.id.signup);
-        signup.setOnClickListener(new View.OnClickListener() {
+        signup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(!hasPicture){
-                    Toast.makeText(getActivity().getApplicationContext(), "You must select a picture", Toast.LENGTH_SHORT).show();
+                if(!isNetworkAvailable(getActivity().getApplicationContext())){
+                    Toast.makeText(getActivity().getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
                 }
-                else if((password1.getText().toString().trim().equals(password2.getText().toString().trim())) && password1.getText().toString().trim().length() != 0){
-                    progressDialog.setMessage("Uploading photo...");
-                    progressDialog.setCancelable(false);
-                    progressDialog.show();
+                else{
+                    if(!hasPicture){
+                        Toast.makeText(getActivity().getApplicationContext(), "You must select a picture", Toast.LENGTH_SHORT).show();
+                    }
+                    else if((password1.getText().toString().trim().equals(password2.getText().toString().trim())) && password1.getText().toString().trim().length() > 5){
+                        progressDialog.setMessage("Uploading photo...");
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
 
-                    final StorageReference ref = storageReference2.child("photos").child(Long.toString(System.currentTimeMillis()));
-                    ref.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot){
+                        final StorageReference ref = storageReference2.child("photos").child(Long.toString(System.currentTimeMillis()));
+                        ref.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot){
 
-                            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    photo_url = uri.toString();
-                                }
-                            })
-
-                                .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
-                                    public void onComplete(@NonNull Task<Uri> task){
+                                    public void onSuccess(Uri uri) {
+                                        photo_url = uri.toString();
+                                    }
+                                })
 
-                                        if(task.isSuccessful()){
-                                            progressDialog.setMessage("Creating account...");
-                                            progressDialog.setCancelable(false);
-                                            progressDialog.show();
+                                        .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Uri> task){
 
-                                            mAuth.createUserWithEmailAndPassword(stud_email, password1.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                                    if(task.isSuccessful()){
-                                                        progressDialog.setMessage("Uploading data...");
-                                                        databaseReference.child("users").child(mAuth.getUid()).setValue(new User(user_type, stud_name, stud_email, stud_matric, stud_level, stud_faculty, stud_dept));
-                                                        try{
-                                                            Thread.sleep(2000);
-                                                        }
-                                                        catch(Exception e){
+                                                if(task.isSuccessful()){
+                                                    progressDialog.setMessage("Creating account...");
+                                                    progressDialog.setCancelable(false);
+                                                    progressDialog.show();
 
-                                                        }
-                                                        progressDialog.cancel();
-                                                        progressDialog.dismiss();
+                                                    mAuth.createUserWithEmailAndPassword(stud_email, password1.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                                            if(task.isSuccessful()){
+                                                                progressDialog.setMessage("Uploading data...");
+                                                                databaseReference.child("users").child(mAuth.getUid()).setValue(new User(user_type, stud_name, stud_email, stud_matric, stud_level, stud_faculty, stud_dept));
+                                                                try{
+                                                                    Thread.sleep(2000);
+                                                                }
+                                                                catch(Exception e){
 
-                                                        startActivity(new Intent(getActivity().getApplicationContext(), LandingActivity.class));
-                                                    }
+                                                                }
+                                                                progressDialog.cancel();
+                                                                progressDialog.dismiss();
 
-                                                    else{
-                                                        progressDialog.cancel();
-                                                        progressDialog.dismiss();
-                                                        try {
-                                                            throw task.getException();
+                                                                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                                                                editor.putString("login", "true");
+                                                                editor.apply();
+
+                                                                startActivity(new Intent(getActivity().getApplicationContext(), LandingActivity.class));
+                                                            }
+
+                                                            else{
+                                                                progressDialog.cancel();
+                                                                progressDialog.dismiss();
+                                                                try {
+                                                                    throw task.getException();
+                                                                }
+                                                                catch(FirebaseAuthUserCollisionException e){
+                                                                    new AlertDialog.Builder(getActivity())
+                                                                            .setMessage("Email already in use")
+                                                                            .setCancelable(true)
+                                                                            .setPositiveButton("Okay", null)
+                                                                            .show();
+                                                                }
+                                                                catch(Exception e) {
+                                                                    new AlertDialog.Builder(getActivity())
+                                                                            .setMessage("Failed, try again")
+                                                                            .setCancelable(true)
+                                                                            .setPositiveButton("Okay", null)
+                                                                            .show();
+                                                                }
+                                                            }
                                                         }
-                                                        catch(FirebaseAuthUserCollisionException e){
-                                                            new AlertDialog.Builder(getActivity())
-                                                                    .setMessage("Email already in use")
-                                                                    .setCancelable(true)
-                                                                    .setPositiveButton("Okay", null)
-                                                                    .show();
-                                                        }
-                                                        catch(Exception e) {
-                                                            new AlertDialog.Builder(getActivity())
-                                                                    .setMessage("Failed, try again")
-                                                                    .setCancelable(true)
-                                                                    .setPositiveButton("Okay", null)
-                                                                    .show();
-                                                        }
-                                                    }
+                                                    });
+
                                                 }
-                                            });
-
-                                        }
-                                        else{
-                                            progressDialog.dismiss();
-                                            progressDialog.cancel();
-                                            Toast.makeText(getActivity().getApplicationContext(), "Failed, try again", Toast.LENGTH_LONG).show();
-                                        }
+                                                else{
+                                                    progressDialog.dismiss();
+                                                    progressDialog.cancel();
+                                                    Toast.makeText(getActivity().getApplicationContext(), "Failed, try again", Toast.LENGTH_LONG).show();
+                                                }
 
                                             }
                                         });
-                                        }
-                                    });
-                                }
+                            }
+                        });
+                    }
 
 
+                    else if(password1.getText().toString().trim().length() > 0 && password1.getText().toString().trim().length() < 6){
+                        Toast.makeText(getActivity().getApplicationContext(), "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+                    }
 
-                        else{
-                            Toast.makeText(getActivity().getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
-                        }
+                    else{
+                        Toast.makeText(getActivity().getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
@@ -232,4 +249,19 @@ public class SignupNextFragment extends Fragment{
         }
     }
 
+
+    private boolean isNetworkAvailable(Context context){
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null;
+    }
+
+
+    @Override
+    public boolean onBackPressed(){
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.container, new SignUpInitialFragment());
+        fragmentTransaction.commit();
+        return true;
+    }
 }

@@ -94,7 +94,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:hint="Full name"
@@ -106,7 +106,7 @@
                     android:layout_marginTop="15dp"/>
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:singleLine="true"
@@ -118,7 +118,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:singleLine="true"
@@ -129,7 +129,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:hint="Level"
@@ -141,7 +141,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:singleLine="true"
@@ -153,7 +153,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:hint="Department"

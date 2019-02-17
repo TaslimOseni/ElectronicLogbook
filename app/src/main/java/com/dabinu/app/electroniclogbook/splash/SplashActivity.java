@@ -1,6 +1,8 @@
 package com.dabinu.app.electroniclogbook.splash;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,7 @@ import android.os.Bundle;
 
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.auth.AuthActivity;
+import com.dabinu.app.electroniclogbook.landing.LandingActivity;
 
 public class SplashActivity extends AppCompatActivity{
 
@@ -24,8 +27,15 @@ public class SplashActivity extends AppCompatActivity{
 
             @Override
             public void onFinish(){
-                //todo: Check login status
-                startActivity(new Intent(getApplicationContext(), AuthActivity.class));
+                SharedPreferences sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE);
+
+                if(sharedPreferences.getString("login", "false").equals("true")){
+                    startActivity(new Intent(getApplicationContext(), LandingActivity.class));
+                }
+                else{
+                    startActivity(new Intent(getApplicationContext(), AuthActivity.class));
+                }
+
             }
         }.start();
 

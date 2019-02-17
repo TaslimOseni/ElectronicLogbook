@@ -17,12 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dabinu.app.electroniclogbook.R;
-import com.dabinu.app.electroniclogbook.splash.fragments.WelcomeFragment;
+import com.dabinu.app.electroniclogbook.auth.AuthActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SignUpAsFragment extends Fragment{
+public class SignUpAsFragment extends Fragment implements AuthActivity.IOnBackPressed{
 
 
     Spinner signupas;
@@ -73,6 +73,12 @@ public class SignUpAsFragment extends Fragment{
                 if(((String) signupas.getSelectedItem()).equals("Sign up as")){
                     Toast.makeText(getActivity().getApplicationContext(), "You must select a category", Toast.LENGTH_SHORT).show();
                 }
+                else if(((String) signupas.getSelectedItem()).equals("Department supervisor")){
+                    Toast.makeText(getActivity().getApplicationContext(), "You can only sign up as a student for now", Toast.LENGTH_SHORT).show();
+                }
+                else if(((String) signupas.getSelectedItem()).equals("Industrial supervisor")){
+                    Toast.makeText(getActivity().getApplicationContext(), "You can only sign up as a student for now", Toast.LENGTH_SHORT).show();
+                }
                 else{
                     sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
                     editor = sharedPreferences.edit();
@@ -88,6 +94,15 @@ public class SignUpAsFragment extends Fragment{
         });
 
         return view;
+    }
+
+
+    @Override
+    public boolean onBackPressed(){
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.container, new WelcomeFragment());
+        fragmentTransaction.commit();
+        return true;
     }
 
 }

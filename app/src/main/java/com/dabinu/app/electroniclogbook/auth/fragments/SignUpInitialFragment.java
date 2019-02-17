@@ -17,12 +17,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.dabinu.app.electroniclogbook.R;
+import com.dabinu.app.electroniclogbook.auth.AuthActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SignUpInitialFragment extends Fragment {
+public class SignUpInitialFragment extends Fragment implements AuthActivity.IOnBackPressed{
 
     TextView header;
     ImageButton back;
@@ -140,4 +141,12 @@ public class SignUpInitialFragment extends Fragment {
         return view;
     }
 
+
+    @Override
+    public boolean onBackPressed() {
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.container, new SignUpAsFragment());
+        fragmentTransaction.commit();
+        return true;
+    }
 }

@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -21,8 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dabinu.app.electroniclogbook.R;
+import com.dabinu.app.electroniclogbook.auth.AuthActivity;
 import com.dabinu.app.electroniclogbook.landing.LandingActivity;
-import com.dabinu.app.electroniclogbook.splash.fragments.WelcomeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -32,7 +33,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements AuthActivity.IOnBackPressed{
 
     EditText email, password;
     TextView signup;
@@ -99,6 +100,12 @@ public class LoginFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                                editor.putString("login", "true");
+                                editor.apply();
+
                                 progressDialog.cancel();
                                 progressDialog.dismiss();
                                 startActivity(new Intent(getActivity().getApplicationContext(), LandingActivity.class));
@@ -139,6 +146,15 @@ public class LoginFragment extends Fragment {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null;
+    }
+
+
+    @Override
+    public boolean onBackPressed(){
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.container, new WelcomeFragment());
+        fragmentTransaction.commit();
+        return true;
     }
 
 }
