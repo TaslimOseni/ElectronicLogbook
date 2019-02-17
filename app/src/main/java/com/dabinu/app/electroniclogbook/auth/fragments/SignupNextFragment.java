@@ -103,7 +103,7 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
         switch(user_type){
             case "Student":
                 final_email = stud_email;
-                final_user = new User(user_type, stud_name, stud_email, stud_matric, stud_level, stud_faculty, stud_dept);
+                final_user = new User(user_type, stud_name, stud_email, stud_matric, stud_level, stud_faculty, stud_dept, "false");
                 break;
             case "Department supervisor":
                 final_email = dept_email;
@@ -111,7 +111,7 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
                 break;
             case "Industrial supervisor":
                 final_email = ind_email;
-                final_user = new User(user_type, ind_name, ind_email, ind_phone, ind_rank, ind_staffID, "some", "extraSome");
+                final_user = new User(user_type, ind_name, ind_email, ind_phone, ind_rank, ind_staffID, "some", "extraSome", "extraTwo");
                 break;
         }
 
