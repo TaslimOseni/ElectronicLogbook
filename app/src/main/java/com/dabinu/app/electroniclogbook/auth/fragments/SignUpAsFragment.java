@@ -1,6 +1,8 @@
 package com.dabinu.app.electroniclogbook.auth.fragments;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -20,15 +22,17 @@ import com.dabinu.app.electroniclogbook.splash.fragments.WelcomeFragment;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SignUpAsFragment extends Fragment {
+public class SignUpAsFragment extends Fragment{
 
 
     Spinner signupas;
     CardView proceed;
     TextView login;
     ImageButton back;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
-    public SignUpAsFragment() {
+    public SignUpAsFragment(){
         // Required empty public constructor
     }
 
@@ -70,6 +74,12 @@ public class SignUpAsFragment extends Fragment {
                     Toast.makeText(getActivity().getApplicationContext(), "You must select a category", Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
+
+                    editor.putString("type_of_user", (String) signupas.getSelectedItem());
+                    editor.apply();
+
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.container, new SignUpInitialFragment());
                     fragmentTransaction.commit();

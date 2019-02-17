@@ -16,8 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".landing.LandingActivity" />
-        <activity android:name=".auth.AuthActivity"></activity>
+        <activity android:name=".auth.AuthActivity" />
+        <activity
+            android:name=".landing.LandingActivity"
+            android:label="@string/title_activity_landing"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

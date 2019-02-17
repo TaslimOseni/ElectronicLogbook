@@ -1,0 +1,53 @@
+package com.dabinu.app.electroniclogbook.models;
+
+/**
+ * Created by Taslim Oseni on 2/17/19.
+ */
+public class User{
+
+    public String type, fullname, email, matric, level, faculty, department;
+
+    public User(){
+
+    }
+
+
+    public User(String type, String fullname, String email, String matric, String level, String faculty, String department){
+        this.type = type;
+        this.fullname = fullname;
+        this.email = email;
+        this.matric = matric;
+        this.level = level;
+        this.faculty = faculty;
+        this.department = department;
+    }
+
+
+    public String getType() {
+        return type;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getMatric() {
+        return matric;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+}
