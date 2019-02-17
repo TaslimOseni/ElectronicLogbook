@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.auth.AuthActivity;
-import com.dabinu.app.electroniclogbook.landing.LandingActivity;
+import com.dabinu.app.electroniclogbook.student.StudentActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -108,7 +108,7 @@ public class LoginFragment extends Fragment implements AuthActivity.IOnBackPress
 
                                 progressDialog.cancel();
                                 progressDialog.dismiss();
-                                startActivity(new Intent(getActivity().getApplicationContext(), LandingActivity.class));
+                                startActivity(new Intent(getActivity().getApplicationContext(), StudentActivity.class));
                             }
                             else{
                                 progressDialog.cancel();

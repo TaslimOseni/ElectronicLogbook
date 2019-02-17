@@ -1,4 +1,4 @@
-package com.dabinu.app.electroniclogbook.landing.fragments;
+package com.dabinu.app.electroniclogbook.student.fragments;
 
 
 import android.os.Bundle;
@@ -12,18 +12,19 @@ import com.dabinu.app.electroniclogbook.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PlacementDetailsFragment extends Fragment {
+public class SupervisorFragment extends Fragment {
 
 
-    public PlacementDetailsFragment() {
+    public SupervisorFragment() {
         // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_placement_details, container, false);
+        return inflater.inflate(R.layout.fragment_supervisor, container, false);
     }
 
 }

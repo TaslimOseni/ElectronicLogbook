@@ -26,14 +26,13 @@ import android.widget.Toast;
 
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.auth.AuthActivity;
-import com.dabinu.app.electroniclogbook.landing.LandingActivity;
+import com.dabinu.app.electroniclogbook.student.StudentActivity;
 import com.dabinu.app.electroniclogbook.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -193,7 +192,7 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
                                                                 editor.putString("login", "true");
                                                                 editor.apply();
 
-                                                                startActivity(new Intent(getActivity().getApplicationContext(), LandingActivity.class)); }
+                                                                startActivity(new Intent(getActivity().getApplicationContext(), StudentActivity.class)); }
 
                                                             else{
                                                                 progressDialog.cancel();

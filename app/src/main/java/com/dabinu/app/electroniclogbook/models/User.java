@@ -69,4 +69,20 @@ public class User{
     public String getDepartment() {
         return department;
     }
+
+    public String getStaffID(){
+        return staffID;
+    }
+
+    public String getPhone(){
+        return phone;
+    }
+
+    public String getRank(){
+        return rank;
+    }
+
+    public String getFilledPlacement(){
+        return filledPlacement;
+    }
 }

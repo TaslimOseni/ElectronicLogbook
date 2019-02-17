@@ -1,12 +1,9 @@
-package com.dabinu.app.electroniclogbook.landing;
+package com.dabinu.app.electroniclogbook.student;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,15 +15,16 @@ import android.view.MenuItem;
 
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.exit.ExitActivity;
-import com.dabinu.app.electroniclogbook.landing.fragments.FakeFragment;
+import com.dabinu.app.electroniclogbook.student.fragments.FillLogbookFragment;
+import com.dabinu.app.electroniclogbook.student.fragments.HomeFragment;
 
-public class LandingActivity extends AppCompatActivity
+public class StudentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_landing);
+        setContentView(R.layout.activity_student);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -42,8 +40,10 @@ public class LandingActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.container, new FakeFragment());
+        fragmentTransaction.replace(R.id.container, new HomeFragment());
         fragmentTransaction.commit();
+
+        getSupportActionBar().hide();
     }
 
     @Override
@@ -70,7 +70,7 @@ public class LandingActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.landing, menu);
+        getMenuInflater().inflate(R.menu.student, menu);
         return true;
     }
 

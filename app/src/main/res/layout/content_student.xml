@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/container"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".landing.LandingActivity"
-    tools:showIn="@layout/app_bar_landing">
+    tools:context=".student.StudentActivity"
+    tools:showIn="@layout/app_bar_student">
 
 </RelativeLayout>

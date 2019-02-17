@@ -19,7 +19,7 @@
         <activity android:name=".auth.AuthActivity" />
         <activity android:name=".exit.ExitActivity" />
         <activity
-            android:name=".landing.LandingActivity"
+            android:name=".student.StudentActivity"
             android:label="@string/title_activity_landing"
             android:theme="@style/AppTheme">
 

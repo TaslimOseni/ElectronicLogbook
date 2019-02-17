@@ -4,13 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.CountDownTimer;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.auth.AuthActivity;
-import com.dabinu.app.electroniclogbook.landing.LandingActivity;
+import com.dabinu.app.electroniclogbook.student.StudentActivity;
 
 public class SplashActivity extends AppCompatActivity{
 
@@ -30,7 +29,7 @@ public class SplashActivity extends AppCompatActivity{
                 SharedPreferences sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE);
 
                 if(sharedPreferences.getString("login", "false").equals("true")){
-                    startActivity(new Intent(getApplicationContext(), LandingActivity.class));
+                    startActivity(new Intent(getApplicationContext(), StudentActivity.class));
                 }
                 else{
                     startActivity(new Intent(getApplicationContext(), AuthActivity.class));
