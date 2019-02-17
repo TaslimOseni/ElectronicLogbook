@@ -73,12 +73,6 @@ public class SignUpAsFragment extends Fragment implements AuthActivity.IOnBackPr
                 if(((String) signupas.getSelectedItem()).equals("Sign up as")){
                     Toast.makeText(getActivity().getApplicationContext(), "You must select a category", Toast.LENGTH_SHORT).show();
                 }
-                else if(((String) signupas.getSelectedItem()).equals("Department supervisor")){
-                    Toast.makeText(getActivity().getApplicationContext(), "You can only sign up as a student for now", Toast.LENGTH_SHORT).show();
-                }
-                else if(((String) signupas.getSelectedItem()).equals("Industrial supervisor")){
-                    Toast.makeText(getActivity().getApplicationContext(), "You can only sign up as a student for now", Toast.LENGTH_SHORT).show();
-                }
                 else{
                     sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
                     editor = sharedPreferences.edit();

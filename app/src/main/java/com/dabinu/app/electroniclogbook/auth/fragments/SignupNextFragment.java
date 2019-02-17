@@ -60,6 +60,10 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
     SharedPreferences sharedPreferences;
     String user_type;
     String stud_name, stud_email, stud_matric, stud_level, stud_faculty, stud_dept;
+    String ind_name, ind_email, ind_phone, ind_rank, ind_staffID;
+    String dept_name, dept_email, dept_faculty, dept_dept, dept_staffID;
+    String final_email;
+    User final_user;
 
     public SignupNextFragment(){
         // Required empty public constructor
@@ -74,12 +78,43 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
         sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
 
         user_type = sharedPreferences.getString("type_of_user", "");
+
         stud_name = sharedPreferences.getString("stud_name", "");
         stud_email = sharedPreferences.getString("stud_email", "");
         stud_matric = sharedPreferences.getString("stud_matric", "");
         stud_level = sharedPreferences.getString("stud_level", "");
         stud_faculty = sharedPreferences.getString("stud_faculty", "");
         stud_dept = sharedPreferences.getString("stud_dept", "");
+
+
+        ind_name = sharedPreferences.getString("ind_name", "");
+        ind_email = sharedPreferences.getString("ind_email", "");
+        ind_phone = sharedPreferences.getString("ind_phone", "");
+        ind_rank = sharedPreferences.getString("ind_rank", "");
+        ind_staffID = sharedPreferences.getString("ind_staffID", "");
+
+
+        dept_name = sharedPreferences.getString("dept_name", "");
+        dept_email = sharedPreferences.getString("dept_email", "");
+        dept_faculty = sharedPreferences.getString("dept_faculty", "");
+        dept_dept = sharedPreferences.getString("dept_dept", "");
+        dept_staffID = sharedPreferences.getString("dept_staffID", "");
+
+        switch(user_type){
+            case "Student":
+                final_email = stud_email;
+                final_user = new User(user_type, stud_name, stud_email, stud_matric, stud_level, stud_faculty, stud_dept);
+                break;
+            case "Department supervisor":
+                final_email = dept_email;
+                final_user = new User(user_type, dept_name, dept_email, dept_faculty, dept_dept, dept_staffID);
+                break;
+            case "Industrial supervisor":
+                final_email = ind_email;
+                final_user = new User(user_type, ind_name, ind_email, ind_phone, ind_rank, ind_staffID, "some", "extraSome");
+                break;
+        }
+
 
         storageReference2 = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -138,12 +173,12 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
                                                     progressDialog.setCancelable(false);
                                                     progressDialog.show();
 
-                                                    mAuth.createUserWithEmailAndPassword(stud_email, password1.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                    mAuth.createUserWithEmailAndPassword(final_email, password1.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<AuthResult> task) {
                                                             if(task.isSuccessful()){
                                                                 progressDialog.setMessage("Uploading data...");
-                                                                databaseReference.child("users").child(mAuth.getUid()).setValue(new User(user_type, stud_name, stud_email, stud_matric, stud_level, stud_faculty, stud_dept));
+                                                                databaseReference.child("users").child(mAuth.getUid()).setValue(final_user);
                                                                 try{
                                                                     Thread.sleep(2000);
                                                                 }
@@ -158,8 +193,7 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
                                                                 editor.putString("login", "true");
                                                                 editor.apply();
 
-                                                                startActivity(new Intent(getActivity().getApplicationContext(), LandingActivity.class));
-                                                            }
+                                                                startActivity(new Intent(getActivity().getApplicationContext(), LandingActivity.class)); }
 
                                                             else{
                                                                 progressDialog.cancel();

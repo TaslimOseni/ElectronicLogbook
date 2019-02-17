@@ -46,7 +46,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Student"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
         android:paddingTop="15dp"
@@ -58,19 +57,6 @@
         android:layout_alignParentTop="true" />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:paddingTop="15dp"
-        android:gravity="center"
-        android:textSize="23sp"
-        android:layout_toEndOf="@+id/back"
-        android:layout_marginStart="30dp"
-        android:layout_alignParentTop="true" />
-
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,6 +64,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:id="@+id/student"
+        android:visibility="gone"
         android:layout_centerInParent="true">
 
         <android.support.v7.widget.CardView
@@ -220,7 +207,8 @@
                     android:layout_width="170dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:hint="First name"
+                    android:hint="Full name"
+                    android:id="@+id/ind_name"
                     android:singleLine="true"
                     android:inputType="textPersonName"
                     android:textSize="15sp"
@@ -231,18 +219,8 @@
                     android:layout_width="170dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:hint="Last name"
-                    android:singleLine="true"
-                    android:inputType="textPersonName"
-                    android:textSize="15sp"
-                    android:padding="7dp"
-                    android:layout_marginTop="10dp"/>
-
-                <EditText
-                    android:layout_width="170dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
                     android:hint="Email"
+                    android:id="@+id/ind_email"
                     android:singleLine="true"
                     android:inputType="textEmailAddress"
                     android:textSize="15sp"
@@ -254,6 +232,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:hint="Phone number"
+                    android:id="@+id/ind_phone"
                     android:singleLine="true"
                     android:inputType="phone"
                     android:textSize="15sp"
@@ -265,6 +244,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:hint="Rank"
+                    android:id="@+id/ind_rank"
                     android:singleLine="true"
                     android:textSize="15sp"
                     android:padding="7dp"
@@ -275,6 +255,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:hint="Staff ID"
+                    android:id="@+id/ind_staffID"
                     android:singleLine="true"
                     android:textSize="15sp"
                     android:padding="7dp"
@@ -285,6 +266,7 @@
                     android:layout_width="120dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="30dp"
+                    android:id="@+id/ind_next"
                     android:layout_gravity="center"
                     app:cardBackgroundColor="#000000"
                     android:layout_marginBottom="10dp"
@@ -335,29 +317,21 @@
                     android:layout_width="170dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:hint="First name"
+                    android:hint="Full name"
+                    android:id="@+id/dept_name"
                     android:singleLine="true"
                     android:inputType="textPersonName"
                     android:textSize="15sp"
                     android:padding="7dp"
                     android:layout_marginTop="15dp"/>
 
-                <EditText
-                    android:layout_width="170dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:hint="Last name"
-                    android:singleLine="true"
-                    android:inputType="textPersonName"
-                    android:textSize="15sp"
-                    android:padding="7dp"
-                    android:layout_marginTop="10dp"/>
 
                 <EditText
                     android:layout_width="170dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:hint="Email"
+                    android:id="@+id/dept_email"
                     android:singleLine="true"
                     android:inputType="textEmailAddress"
                     android:textSize="15sp"
@@ -369,6 +343,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:singleLine="true"
+                    android:id="@+id/dept_faculty"
                     android:hint="Faculty"
                     android:textSize="15sp"
                     android:padding="7dp"
@@ -378,6 +353,7 @@
                     android:layout_width="170dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
+                    android:id="@+id/dept_dept"
                     android:hint="Department"
                     android:textSize="15sp"
                     android:singleLine="true"
@@ -388,6 +364,7 @@
                     android:layout_width="170dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
+                    android:id="@+id/dept_staffID"
                     android:hint="Staff ID"
                     android:textSize="15sp"
                     android:singleLine="true"
@@ -400,6 +377,7 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="30dp"
                     android:layout_gravity="center"
+                    android:id="@+id/dept_next"
                     app:cardBackgroundColor="#000000"
                     android:layout_marginBottom="10dp"
                     app:cardCornerRadius="5dp">

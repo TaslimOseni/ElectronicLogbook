@@ -31,6 +31,10 @@ public class SignUpInitialFragment extends Fragment implements AuthActivity.IOnB
     SharedPreferences.Editor editor;
     EditText stud_fullname, stud_email, stud_matric, stud_level, stud_faculty, stud_department;
     CardView stud_next;
+    EditText ind_name, ind_email, ind_phone, ind_rank, ind_staffID;
+    CardView ind_next;
+    EditText dept_name, dept_email, dept_faculty, dept_dept, dept_staffID;
+    CardView dept_next;
     FrameLayout student, ind_supervisor, dept_supervisor;
     ProgressDialog progressDialog;
     FirebaseAuth mAuth;
@@ -138,6 +142,101 @@ public class SignUpInitialFragment extends Fragment implements AuthActivity.IOnB
             }
         });
 
+
+
+
+
+        ind_name = view.findViewById(R.id.ind_name);
+        ind_email = view.findViewById(R.id.ind_email);
+        ind_phone = view.findViewById(R.id.ind_phone);
+        ind_rank = view.findViewById(R.id.ind_rank);
+        ind_staffID = view.findViewById(R.id.ind_staffID);
+        ind_next = view.findViewById(R.id.ind_next);
+
+
+        ind_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(ind_name.getText().toString().trim().equals("")){
+                    ind_name.setError("This field is required");
+                }
+                else if(ind_email.getText().toString().trim().equals("")){
+                    ind_email.setError("This field is required");
+                }
+                else if(ind_phone.getText().toString().trim().equals("")){
+                    ind_phone.setError("This field is required");
+                }
+                else if(ind_rank.getText().toString().trim().equals("")){
+                    ind_rank.setError("This field is required");
+                }
+                else if(ind_staffID.getText().toString().trim().equals("")){
+                    ind_staffID.setError("This field is required");
+                }
+                else{
+                    editor.putString("ind_name", ind_name.getText().toString().trim());
+                    editor.putString("ind_email", ind_email.getText().toString().trim());
+                    editor.putString("ind_phone", ind_phone.getText().toString().trim());
+                    editor.putString("ind_rank", ind_rank.getText().toString().trim());
+                    editor.putString("ind_staffID", ind_staffID.getText().toString().trim());
+
+                    editor.apply();
+
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.container, new SignupNextFragment());
+                    fragmentTransaction.commit();
+
+                }
+            }
+        });
+
+
+
+
+        dept_name = view.findViewById(R.id.dept_name);
+        dept_email = view.findViewById(R.id.dept_email);
+        dept_faculty = view.findViewById(R.id.dept_faculty);
+        dept_dept = view.findViewById(R.id.dept_dept);
+        dept_staffID = view.findViewById(R.id.dept_staffID);
+        dept_next = view.findViewById(R.id.dept_next);
+
+
+        dept_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dept_name.getText().toString().trim().equals("")){
+                    dept_name.setError("This field is required");
+                }
+                else if(dept_email.getText().toString().trim().equals("")){
+                    dept_email.setError("This field is required");
+                }
+                else if(dept_faculty.getText().toString().trim().equals("")){
+                    dept_faculty.setError("This field is required");
+                }
+                else if(dept_dept.getText().toString().trim().equals("")){
+                    dept_dept.setError("This field is required");
+                }
+                else if(dept_staffID.getText().toString().trim().equals("")){
+                    dept_staffID.setError("This field is required");
+                }
+                else{
+                    editor.putString("dept_name", dept_name.getText().toString().trim());
+                    editor.putString("dept_email", dept_email.getText().toString().trim());
+                    editor.putString("dept_faculty", dept_faculty.getText().toString().trim());
+                    editor.putString("dept_dept", dept_dept.getText().toString().trim());
+                    editor.putString("dept_staffID", dept_staffID.getText().toString().trim());
+
+                    editor.apply();
+
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.container, new SignupNextFragment());
+                    fragmentTransaction.commit();
+
+                }
+            }
+        });
+
+
+
         return view;
     }
 
@@ -149,4 +248,5 @@ public class SignUpInitialFragment extends Fragment implements AuthActivity.IOnB
         fragmentTransaction.commit();
         return true;
     }
+
 }
