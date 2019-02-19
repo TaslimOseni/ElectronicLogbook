@@ -6,10 +6,31 @@
     android:background="#DDDDDD"
     tools:context=".student.fragments.HomeFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#000000"
+        android:id="@+id/top"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Home"
+            android:textColor="#FFFFFF"
+            android:textSize="21sp"
+            android:gravity="center"
+            android:layout_marginStart="15dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/top"
         android:orientation="vertical">
 
         <LinearLayout
@@ -21,35 +42,41 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/fill_logbook"
                 android:layout_margin="7dp"
                 android:background="#FFFFFF"
                 android:layout_weight="1">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/fill_logbook">
 
-                    <ImageButton
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/book"
-                        android:background="@android:color/transparent"
-                        android:layout_gravity="center"/>
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Fill Logbook"
-                        android:layout_marginTop="13dp"
-                        android:gravity="center"
-                        android:textColor="#000000"
-                        android:textSize="17sp"/>
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <ImageButton
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/book"
+                            android:background="@android:color/transparent"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fill Logbook"
+                            android:layout_marginTop="13dp"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:textSize="17sp"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
             </RelativeLayout>
 
@@ -58,113 +85,40 @@
                 android:layout_height="match_parent"
                 android:layout_margin="7dp"
                 android:background="#FFFFFF"
-                android:id="@+id/placement_details"
                 android:layout_weight="1">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/placement_details">
 
-                    <ImageButton
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/company"
-                        android:background="@android:color/transparent"
-                        android:layout_gravity="center"/>
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Placement Details"
-                        android:layout_marginTop="13dp"
-                        android:gravity="center"
-                        android:textColor="#000000"
-                        android:textSize="17sp"/>
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <ImageButton
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/company"
+                            android:background="@android:color/transparent"
+                            android:layout_gravity="center"/>
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Placement Details"
+                            android:layout_marginTop="13dp"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:textSize="17sp"/>
 
-            </RelativeLayout>
+                    </LinearLayout>
 
-        </LinearLayout>
+                </RelativeLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="7dp"
-                android:background="#FFFFFF"
-                android:id="@+id/supervisor"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/supervisor"
-                        android:background="@android:color/transparent"
-                        android:layout_gravity="center"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Supervisor"
-                        android:layout_marginTop="13dp"
-                        android:gravity="center"
-                        android:textColor="#000000"
-                        android:textSize="17sp"/>
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="7dp"
-                android:background="#FFFFFF"
-                android:id="@+id/profile"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/profile"
-                        android:background="@android:color/transparent"
-                        android:layout_gravity="center"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Profile"
-                        android:layout_marginTop="13dp"
-                        android:gravity="center"
-                        android:textColor="#000000"
-                        android:textSize="17sp"/>
-
-                </LinearLayout>
 
             </RelativeLayout>
 
@@ -182,33 +136,39 @@
                 android:layout_height="match_parent"
                 android:layout_margin="7dp"
                 android:background="#FFFFFF"
-                android:id="@+id/about"
                 android:layout_weight="1">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/supervisor">
 
-                    <ImageButton
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/about"
-                        android:background="@android:color/transparent"
-                        android:layout_gravity="center"/>
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="About app"
-                        android:layout_marginTop="13dp"
-                        android:gravity="center"
-                        android:textColor="#000000"
-                        android:textSize="17sp"/>
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <ImageButton
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/supervisor"
+                            android:background="@android:color/transparent"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Supervisor"
+                            android:layout_marginTop="13dp"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:textSize="17sp"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
             </RelativeLayout>
 
@@ -217,33 +177,130 @@
                 android:layout_height="match_parent"
                 android:layout_margin="7dp"
                 android:background="#FFFFFF"
-                android:id="@+id/signout"
                 android:layout_weight="1">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/profile">
 
-                    <ImageButton
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/signout"
-                        android:background="@android:color/transparent"
-                        android:layout_gravity="center"/>
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sign out"
-                        android:layout_marginTop="13dp"
-                        android:gravity="center"
-                        android:textColor="#000000"
-                        android:textSize="17sp"/>
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <ImageButton
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/profile"
+                            android:background="@android:color/transparent"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Profile"
+                            android:layout_marginTop="13dp"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:textSize="17sp"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="7dp"
+                android:background="#FFFFFF"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/about">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/about"
+                            android:background="@android:color/transparent"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="About app"
+                            android:layout_marginTop="13dp"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:textSize="17sp"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="7dp"
+                android:background="#FFFFFF"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/signout">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/signout"
+                            android:background="@android:color/transparent"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sign out"
+                            android:layout_marginTop="13dp"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:textSize="17sp"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
             </RelativeLayout>
 

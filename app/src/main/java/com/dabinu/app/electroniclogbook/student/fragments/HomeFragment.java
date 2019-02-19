@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -21,7 +22,9 @@ import android.widget.Toast;
 
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.auth.AuthActivity;
+import com.dabinu.app.electroniclogbook.exit.ExitActivity;
 import com.dabinu.app.electroniclogbook.models.User;
+import com.dabinu.app.electroniclogbook.student.StudentActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,7 +35,8 @@ import com.google.firebase.database.ValueEventListener;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+
+public class HomeFragment extends Fragment implements StudentActivity.IOnBackPressed{
 
     RelativeLayout fill_logbook, placement_details, supervisor, profile, about, signout;
     FirebaseAuth mAuth;
@@ -177,23 +181,27 @@ public class HomeFragment extends Fragment {
 
                     mAuth.signOut();
 
-                    try{
-                        Thread.sleep(3000);
-                    }
-                    catch(Exception e){
+                    new CountDownTimer(3000, 1000){
+                        @Override
+                        public void onTick(long l) {
 
-                    }
+                        }
 
-                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                        @Override
+                        public void onFinish() {
+                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                    editor.putString("login", "false");
-                    editor.apply();
+                            editor.putString("login", "false");
+                            editor.apply();
 
-                    progressDialog.cancel();
-                    progressDialog.dismiss();
+                            progressDialog.cancel();
+                            progressDialog.dismiss();
 
-                    startActivity(new Intent(getActivity().getApplicationContext(), AuthActivity.class));
+                            startActivity(new Intent(getActivity().getApplicationContext(), AuthActivity.class));
+                        }
+                    }.start();
+
                 }
                 else{
                     Toast.makeText(getActivity().getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
@@ -214,4 +222,20 @@ public class HomeFragment extends Fragment {
         return activeNetworkInfo != null;
     }
 
+
+    @Override
+    public boolean onBackPressed(){
+        new AlertDialog.Builder(getActivity())
+                .setMessage("Are you sure you want to exit?")
+                .setCancelable(true)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ExitActivity.exit(getActivity().getApplicationContext());
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+        return true;
+    }
 }

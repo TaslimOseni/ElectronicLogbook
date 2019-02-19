@@ -26,8 +26,8 @@ import android.widget.Toast;
 
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.auth.AuthActivity;
-import com.dabinu.app.electroniclogbook.student.StudentActivity;
 import com.dabinu.app.electroniclogbook.models.User;
+import com.dabinu.app.electroniclogbook.student.StudentActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;

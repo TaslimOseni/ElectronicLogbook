@@ -3,19 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DDDDDD"
+    android:background="#EEEEEE"
     tools:context=".student.fragments.FillLogbookFragment">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#000000"
+            android:id="@+id/top"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/back"
+                android:background="@android:color/transparent"
+                android:padding="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Fill logbook"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginStart="15dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="15dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -30,12 +57,13 @@
                     android:layout_height="wrap_content"
                     android:text="Select a week"
                     android:textStyle="bold"
-                    android:textColor="#000000"/>
+                    android:textColor="#444444"/>
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="7dp"
+                    android:id="@+id/week"
                     android:background="@drawable/box">
 
                 </Spinner>
@@ -55,12 +83,13 @@
                     android:layout_height="wrap_content"
                     android:text="Select a day"
                     android:textStyle="bold"
-                    android:textColor="#000000"/>
+                    android:textColor="#444444"/>
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="7dp"
+                    android:id="@+id/day"
                     android:background="@drawable/box">
 
                 </Spinner>
@@ -72,7 +101,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_margin="15dp"
             android:orientation="vertical">
 
             <TextView
@@ -80,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:text="Pen your activities"
                 android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:textColor="#444444"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -94,7 +123,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_margin="15dp"
             android:orientation="vertical">
 
             <TextView
@@ -102,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:text="Pen your comments"
                 android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:textColor="#444444"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -118,8 +147,7 @@
             android:layout_height="50dp"
             android:text="Submit"
             android:textStyle="bold"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="50dp"
+            android:layout_margin="15dp"
             android:textColor="#FFFFFF"
             android:background="#000000"/>
 
