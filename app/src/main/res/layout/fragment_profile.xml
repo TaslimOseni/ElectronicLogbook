@@ -20,6 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/back_black"
+                android:id="@+id/back"
                 android:background="@android:color/transparent"
                 android:padding="15dp"/>
 
@@ -39,6 +40,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:src="@drawable/taslim"
+            android:id="@+id/circle"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_gravity="center"/>
@@ -70,6 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
+                    android:id="@+id/fullName"
                     android:layout_marginStart="20dp"
                     android:textSize="16sp"
                     android:text="Taslim Oseni"/>
@@ -102,6 +105,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/email"
                 android:layout_marginTop="7dp"
                 android:layout_marginStart="20dp"
                 android:textSize="16sp"
@@ -139,6 +143,7 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginStart="20dp"
                 android:textSize="16sp"
+                android:id="@+id/matricNumber"
                 android:text="CSC/2014/001"/>
 
             <View
@@ -172,6 +177,7 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginStart="20dp"
                 android:textSize="16sp"
+                android:id="@+id/level"
                 android:text="500 level"/>
 
             <View
@@ -206,6 +212,7 @@
                     android:layout_marginTop="7dp"
                     android:layout_marginStart="20dp"
                     android:textSize="16sp"
+                    android:id="@+id/department"
                     android:text="Computer Engineering"/>
 
                 <View
@@ -240,6 +247,7 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginStart="20dp"
                 android:textSize="16sp"
+                android:id="@+id/faculty"
                 android:text="Technology"/>
 
             <View
@@ -253,5 +261,6 @@
 
 
 </LinearLayout>
+
 
 </ScrollView>

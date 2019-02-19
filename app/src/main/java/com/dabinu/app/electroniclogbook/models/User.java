@@ -5,14 +5,14 @@ package com.dabinu.app.electroniclogbook.models;
  */
 public class User{
 
-    public String type, fullname, email, matric, level, faculty, department, staffID, phone, rank, filledPlacement;
+    public String type, fullname, email, matric, level, faculty, department, staffID, phone, rank, filledPlacement, photo_url;
 
     public User(){
 
     }
 
 
-    public User(String type, String fullname, String email, String matric, String level, String faculty, String department, String filledPlacement){
+    public User(String type, String fullname, String email, String matric, String level, String faculty, String department, String filledPlacement, String photo_url){
         this.type = type;
         this.fullname = fullname;
         this.email = email;
@@ -21,24 +21,27 @@ public class User{
         this.faculty = faculty;
         this.department = department;
         this.filledPlacement = filledPlacement;
+        this.photo_url = photo_url;
     }
 
-    public User(String type, String fullname, String email, String faculty, String department, String staffID){
+    public User(String type, String fullname, String email, String faculty, String department, String staffID, String photo_url){
         this.type = type;
         this.fullname = fullname;
         this.email = email;
         this.faculty = faculty;
         this.department = department;
         this.staffID = staffID;
+        this.photo_url = photo_url;
     }
 
-    public User(String type, String fullname, String email, String phone, String rank, String staffId, String plusOne, String extraOne, String extraTwo){
+    public User(String type, String fullname, String email, String phone, String rank, String staffId, String plusOne, String extraOne, String extraTwo, String photo_url){
         this.type = type;
         this.fullname = fullname;
         this.email = email;
         this.phone = phone;
         this.rank = rank;
         this.staffID = staffId;
+        this.photo_url = photo_url;
     }
 
 
@@ -84,5 +87,9 @@ public class User{
 
     public String getFilledPlacement(){
         return filledPlacement;
+    }
+
+    public String getPhoto_url() {
+        return photo_url;
     }
 }

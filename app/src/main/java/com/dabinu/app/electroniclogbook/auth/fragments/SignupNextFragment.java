@@ -99,18 +99,19 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
         dept_dept = sharedPreferences.getString("dept_dept", "");
         dept_staffID = sharedPreferences.getString("dept_staffID", "");
 
+
         switch(user_type){
             case "Student":
                 final_email = stud_email;
-                final_user = new User(user_type, stud_name, stud_email, stud_matric, stud_level, stud_faculty, stud_dept, "false");
+                final_user = new User(user_type, stud_name, stud_email, stud_matric, stud_level, stud_faculty, stud_dept, "false", photo_url);
                 break;
             case "Department supervisor":
                 final_email = dept_email;
-                final_user = new User(user_type, dept_name, dept_email, dept_faculty, dept_dept, dept_staffID);
+                final_user = new User(user_type, dept_name, dept_email, dept_faculty, dept_dept, dept_staffID, photo_url);
                 break;
             case "Industrial supervisor":
                 final_email = ind_email;
-                final_user = new User(user_type, ind_name, ind_email, ind_phone, ind_rank, ind_staffID, "some", "extraSome", "extraTwo");
+                final_user = new User(user_type, ind_name, ind_email, ind_phone, ind_rank, ind_staffID, "some", "extraSome", "extraTwo", photo_url);
                 break;
         }
 
