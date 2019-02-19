@@ -22,6 +22,7 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:id="@+id/back"
                 android:src="@drawable/back"
                 android:background="@android:color/transparent"
                 android:padding="10dp"/>
@@ -49,7 +50,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="15dp"
+                android:layout_marginEnd="30dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -61,7 +62,7 @@
 
                 <Spinner
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="7dp"
                     android:id="@+id/week"
                     android:background="@drawable/box">
@@ -75,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="30dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -87,7 +88,7 @@
 
                 <Spinner
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="7dp"
                     android:id="@+id/day"
                     android:background="@drawable/box">
@@ -113,8 +114,13 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="120dp"
+                android:id="@+id/activity"
                 android:layout_marginTop="7dp"
+                android:gravity="start|top"
+                android:padding="7dp"
+                android:textSize="15sp"
+                android:singleLine="false"
                 android:background="@drawable/box" />
 
         </LinearLayout>
@@ -135,8 +141,13 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="120dp"
+                android:id="@+id/comment"
                 android:layout_marginTop="7dp"
+                android:gravity="start|top"
+                android:padding="7dp"
+                android:singleLine="false"
+                android:textSize="15sp"
                 android:background="@drawable/box" />
 
         </LinearLayout>
@@ -144,8 +155,9 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:text="Submit"
+            android:id="@+id/submit"
             android:textStyle="bold"
             android:layout_margin="15dp"
             android:textColor="#FFFFFF"

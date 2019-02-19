@@ -39,7 +39,6 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@drawable/taslim"
             android:id="@+id/circle"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"

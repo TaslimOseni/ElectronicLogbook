@@ -61,6 +61,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:scaleType="fitXY"
+                            android:id="@+id/pen"
                             android:src="@drawable/book"
                             android:background="@android:color/transparent"
                             android:layout_gravity="center"/>
@@ -102,6 +103,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:scaleType="fitXY"
+                            android:id="@+id/house"
                             android:src="@drawable/company"
                             android:background="@android:color/transparent"
                             android:layout_gravity="center"/>
@@ -153,6 +155,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:scaleType="fitXY"
+                            android:id="@+id/eye"
                             android:src="@drawable/supervisor"
                             android:background="@android:color/transparent"
                             android:layout_gravity="center"/>
@@ -194,6 +197,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:scaleType="fitXY"
+                            android:id="@+id/person"
                             android:src="@drawable/profile"
                             android:background="@android:color/transparent"
                             android:layout_gravity="center"/>
@@ -244,6 +248,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:scaleType="fitXY"
+                            android:id="@+id/abt"
                             android:src="@drawable/about"
                             android:background="@android:color/transparent"
                             android:layout_gravity="center"/>
@@ -285,6 +290,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:scaleType="fitXY"
+                            android:id="@+id/sout"
                             android:src="@drawable/signout"
                             android:background="@android:color/transparent"
                             android:layout_gravity="center"/>

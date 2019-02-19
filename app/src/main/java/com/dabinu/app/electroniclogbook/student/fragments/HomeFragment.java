@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ import com.google.firebase.database.ValueEventListener;
 public class HomeFragment extends Fragment implements StudentActivity.IOnBackPressed{
 
     RelativeLayout fill_logbook, placement_details, supervisor, profile, about, signout;
+    ImageButton pen, house, eye, person, abt, sout;
     FirebaseAuth mAuth;
     DatabaseReference databaseReference;
     ProgressDialog progressDialog;
@@ -72,6 +74,9 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
                     progressDialog.show();
 
                     if(sharedPreferences.getString("filled_placement", "no").equals("yes")){
+                        progressDialog.cancel();
+                        progressDialog.dismiss();
+
                         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.container, new FillLogbookFragment());
                         fragmentTransaction.commit();
@@ -100,6 +105,9 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
                                             .show();
                                 }
                                 else{
+                                    progressDialog.cancel();
+                                    progressDialog.dismiss();
+
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("filled_placement", "yes");
                                     editor.apply();
@@ -132,9 +140,14 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
         placement_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.container, new PlacementDetailsFragment());
-                fragmentTransaction.commit();
+                if(isNetworkAvailable(getActivity().getApplicationContext())){
+                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.container, new PlacementDetailsFragment());
+                    fragmentTransaction.commit();
+                }
+                else{
+                    Toast.makeText(getActivity().getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -144,9 +157,15 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
         supervisor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.container, new SupervisorFragment());
-                fragmentTransaction.commit();
+                Toast.makeText(getActivity().getApplicationContext(), "Not ready yet", Toast.LENGTH_SHORT).show();
+//                if(isNetworkAvailable(getActivity().getApplicationContext())){
+//                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                    fragmentTransaction.replace(R.id.container, new SupervisorFragment());
+//                    fragmentTransaction.commit();
+//                }
+//                else{
+//                    Toast.makeText(getActivity().getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
 
@@ -155,9 +174,14 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.container, new ProfileFragment());
-                fragmentTransaction.commit();
+                if(isNetworkAvailable(getActivity().getApplicationContext())){
+                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.container, new ProfileFragment());
+                    fragmentTransaction.commit();
+                }
+                else{
+                    Toast.makeText(getActivity().getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -197,6 +221,8 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
                             SharedPreferences.Editor editor = sharedPreferences.edit();
 
                             editor.putString("login", "false");
+                            editor.putString("weeks", "6");
+                            editor.putString("filled_placement", "no");
                             editor.apply();
 
                             progressDialog.cancel();
@@ -213,6 +239,55 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
                     }
                 });
 
+
+        pen = view.findViewById(R.id.pen);
+        pen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fill_logbook.performClick();
+            }
+        });
+
+        house = view.findViewById(R.id.house);
+        house.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                placement_details.performClick();
+            }
+        });
+
+
+        eye = view.findViewById(R.id.eye);
+        eye.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                supervisor.performClick();
+            }
+        });
+
+        person = view.findViewById(R.id.person);
+        person.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                profile.performClick();
+            }
+        });
+
+        abt = view.findViewById(R.id.abt);
+        abt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                about.performClick();
+            }
+        });
+
+        sout = view.findViewById(R.id.sout);
+        sout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signout.performClick();
+            }
+        });
 
 
 

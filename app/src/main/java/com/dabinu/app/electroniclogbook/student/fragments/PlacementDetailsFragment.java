@@ -127,6 +127,9 @@ public class PlacementDetailsFragment extends Fragment implements StudentActivit
                 else if(supervisorEmail.getText().toString().trim().equals("")){
                     supervisorEmail.setError("This field is required");
                 }
+                else if(((String) numWeeks.getSelectedItem()).equals("Number of weeks")){
+                    Toast.makeText(getActivity().getApplicationContext(), "Select a valid number of weeks", Toast.LENGTH_SHORT).show();
+                }
                 else{
                     progressDialog.setMessage("Uploading...");
                     progressDialog.setCancelable(false);
@@ -140,6 +143,7 @@ public class PlacementDetailsFragment extends Fragment implements StudentActivit
                                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("filled_placement", "yes");
+                                editor.putString("weeks", ((String) numWeeks.getSelectedItem()).split(" ")[0]);
                                 editor.apply();
 
                                 progressDialog.cancel();
