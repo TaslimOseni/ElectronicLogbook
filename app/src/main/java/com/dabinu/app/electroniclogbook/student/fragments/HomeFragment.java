@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
         fill_logbook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isNetworkAvailable(getActivity().getApplicationContext())){
+                if(isNetworkAvailable(getActivity().getApplicationContext())){
                     progressDialog.setMessage("Please wait...");
                     progressDialog.setCancelable(false);
                     progressDialog.show();
@@ -103,6 +103,10 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("filled_placement", "yes");
                                     editor.apply();
+
+                                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                    fragmentTransaction.replace(R.id.container, new FillLogbookFragment());
+                                    fragmentTransaction.commit();
                                 }
 
                             }
