@@ -23,12 +23,21 @@ import android.widget.Toast;
 
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.auth.AuthActivity;
+import com.dabinu.app.electroniclogbook.dept_supervisor.DeptSupervisorActivity;
+import com.dabinu.app.electroniclogbook.ind_supervisor.IndSupervisorActivity;
+import com.dabinu.app.electroniclogbook.models.User;
 import com.dabinu.app.electroniclogbook.student.StudentActivity;
+import com.dabinu.app.electroniclogbook.utils.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,10 +49,11 @@ public class LoginFragment extends Fragment implements AuthActivity.IOnBackPress
     CardView login;
     ImageButton back;
     ProgressDialog progressDialog;
-    FirebaseAuth firebaseAuth;
+    FirebaseAuth mAuth;
+    DatabaseReference databaseReference;
 
-    public LoginFragment() {
-        // Required empty public constructor
+    public LoginFragment(){
+
     }
 
 
@@ -53,7 +63,9 @@ public class LoginFragment extends Fragment implements AuthActivity.IOnBackPress
 
         progressDialog = new ProgressDialog(getActivity());
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
 
         back = view.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +95,7 @@ public class LoginFragment extends Fragment implements AuthActivity.IOnBackPress
             @Override
             public void onClick(View view){
                 if(!isNetworkAvailable(getActivity().getApplicationContext())){
-                    Toast.makeText(getActivity().getApplicationContext(), "Check your internet comnnection", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
                 }
                 else if(email.getText().toString().trim().equals("")){
                     email.setError("This field is required");
@@ -96,19 +108,57 @@ public class LoginFragment extends Fragment implements AuthActivity.IOnBackPress
                     progressDialog.setCancelable(false);
                     progressDialog.show();
 
-                    firebaseAuth.signInWithEmailAndPassword(email.getText().toString().trim(), password.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    mAuth.signInWithEmailAndPassword(email.getText().toString().trim(), password.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                final SharedPreferences sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
+                                final SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                                editor.putString("login", "true");
+                                editor.putString("login", Constants.LOGGED_IN);
                                 editor.apply();
 
-                                progressDialog.cancel();
-                                progressDialog.dismiss();
-                                startActivity(new Intent(getActivity().getApplicationContext(), StudentActivity.class));
+                                databaseReference.child("users").child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot){
+
+                                        progressDialog.cancel();
+                                        progressDialog.dismiss();
+
+                                        User user = dataSnapshot.getValue(User.class);
+
+                                        editor.putString("type", user.getType());
+                                        editor.apply();
+
+                                        switch(user.getType()){
+
+                                            case Constants.STUDENT:
+                                                startActivity(new Intent(getActivity().getApplicationContext(), StudentActivity.class));
+                                                break;
+                                            case Constants.DEPARTMENTAL_SUPERVISOR:
+                                                startActivity(new Intent(getActivity().getApplicationContext(), DeptSupervisorActivity.class));
+                                                break;
+                                            case Constants.INDUSTRIAL_SUPERVISOR:
+                                                startActivity(new Intent(getActivity().getApplicationContext(), IndSupervisorActivity.class));
+                                                break;
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        progressDialog.cancel();
+                                        progressDialog.dismiss();
+
+                                        new AlertDialog.Builder(getActivity())
+                                                .setMessage("Failed, try again")
+                                                .setCancelable(true)
+                                                .setPositiveButton("Okay", null)
+                                                .show();
+                                    }
+                                });
+
+
                             }
                             else{
                                 progressDialog.cancel();
@@ -147,6 +197,7 @@ public class LoginFragment extends Fragment implements AuthActivity.IOnBackPress
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null;
     }
+
 
 
     @Override

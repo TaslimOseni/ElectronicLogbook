@@ -18,7 +18,9 @@
         </activity>
         <activity android:name=".auth.AuthActivity" />
         <activity android:name=".exit.ExitActivity" />
-        <activity android:name=".student.StudentActivity"></activity>
+        <activity android:name=".student.StudentActivity" />
+        <activity android:name=".dept_supervisor.DeptSupervisorActivity" />
+        <activity android:name=".ind_supervisor.IndSupervisorActivity"></activity>
     </application>
 
 </manifest>

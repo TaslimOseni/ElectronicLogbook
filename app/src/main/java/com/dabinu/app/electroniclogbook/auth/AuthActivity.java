@@ -1,5 +1,6 @@
 package com.dabinu.app.electroniclogbook.auth;
 
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.auth.fragments.WelcomeFragment;
+import com.dabinu.app.electroniclogbook.utils.Constants;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -14,6 +16,14 @@ public class AuthActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("hasFilledPlacement", Constants.DEFAULT_FILL);
+        editor.putString("weeks", Constants.DEFAULT_FILL);
+        editor.putString("type", Constants.STUDENT);
+        editor.apply();
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.container, new WelcomeFragment());

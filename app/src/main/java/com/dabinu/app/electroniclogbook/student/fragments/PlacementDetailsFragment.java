@@ -1,6 +1,7 @@
 package com.dabinu.app.electroniclogbook.student.fragments;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -143,17 +144,33 @@ public class PlacementDetailsFragment extends Fragment implements StudentActivit
                                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("filled_placement", "yes");
-                                editor.putString("weeks", ((String) numWeeks.getSelectedItem()).split(" ")[0]);
+                                editor.putString("number_of_weeks", ((String) numWeeks.getSelectedItem()).split(" ")[0]);
                                 editor.apply();
 
-                                progressDialog.cancel();
-                                progressDialog.dismiss();
+                                databaseReference.child("users").child(mAuth.getUid()).child("filledPlacement").setValue("true").addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task){
+                                        progressDialog.cancel();
+                                        progressDialog.dismiss();
 
-                                Toast.makeText(getActivity().getApplicationContext(), "Placement details successfully updated", Toast.LENGTH_SHORT).show();
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(getActivity().getApplicationContext(), "Placement details successfully updated", Toast.LENGTH_SHORT).show();
 
-                                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                                fragmentTransaction.replace(R.id.container, new HomeFragment());
-                                fragmentTransaction.commit();
+                                            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                            fragmentTransaction.replace(R.id.container, new HomeFragment());
+                                            fragmentTransaction.commit();
+                                        }
+                                        else{
+                                            new AlertDialog.Builder(getActivity())
+                                                    .setMessage("Failed, try again")
+                                                    .setCancelable(false)
+                                                    .setPositiveButton("Okay", null)
+                                                    .show();
+                                        }
+                                    }
+                                });
+
+
                             }
                             else{
                                 progressDialog.dismiss();

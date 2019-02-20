@@ -9,7 +9,10 @@ import android.os.Bundle;
 
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.auth.AuthActivity;
+import com.dabinu.app.electroniclogbook.dept_supervisor.DeptSupervisorActivity;
+import com.dabinu.app.electroniclogbook.ind_supervisor.IndSupervisorActivity;
 import com.dabinu.app.electroniclogbook.student.StudentActivity;
+import com.dabinu.app.electroniclogbook.utils.Constants;
 
 public class SplashActivity extends AppCompatActivity{
 
@@ -28,9 +31,26 @@ public class SplashActivity extends AppCompatActivity{
             public void onFinish(){
                 SharedPreferences sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE);
 
-                if(sharedPreferences.getString("login", "false").equals("true")){
-                    startActivity(new Intent(getApplicationContext(), StudentActivity.class));
+                if(sharedPreferences.getString("login", Constants.NOT_LOGGED_IN).equals(Constants.LOGGED_IN)){
+
+                    switch(sharedPreferences.getString("type", Constants.STUDENT)){
+
+                        case Constants.STUDENT:
+                            startActivity(new Intent(getApplicationContext(), StudentActivity.class));
+                            break;
+
+                        case Constants.DEPARTMENTAL_SUPERVISOR:
+                            startActivity(new Intent(getApplicationContext(), DeptSupervisorActivity.class));
+                            break;
+
+                        case Constants.INDUSTRIAL_SUPERVISOR:
+                            startActivity(new Intent(getApplicationContext(), IndSupervisorActivity.class));
+                            break;
+                    }
+
                 }
+
+
                 else{
                     startActivity(new Intent(getApplicationContext(), AuthActivity.class));
                 }

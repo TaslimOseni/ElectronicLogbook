@@ -24,8 +24,10 @@ import android.widget.Toast;
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.auth.AuthActivity;
 import com.dabinu.app.electroniclogbook.exit.ExitActivity;
+import com.dabinu.app.electroniclogbook.models.PlacementObject;
 import com.dabinu.app.electroniclogbook.models.User;
 import com.dabinu.app.electroniclogbook.student.StudentActivity;
+import com.dabinu.app.electroniclogbook.utils.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,14 +48,14 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
     ProgressDialog progressDialog;
     SharedPreferences sharedPreferences;
 
-    public HomeFragment() {
-        // Required empty public constructor
+    public HomeFragment(){
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_student, container, false);
 
         sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
 
@@ -73,7 +75,7 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
                     progressDialog.setCancelable(false);
                     progressDialog.show();
 
-                    if(sharedPreferences.getString("filled_placement", "no").equals("yes")){
+                    if(sharedPreferences.getString("filled_placement", Constants.DEFAULT_FILL).equals(Constants.FILLED)){
                         progressDialog.cancel();
                         progressDialog.dismiss();
 
@@ -81,6 +83,23 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
                         fragmentTransaction.replace(R.id.container, new FillLogbookFragment());
                         fragmentTransaction.commit();
                     }
+
+                    else if(sharedPreferences.getString("filled_placement", Constants.DEFAULT_FILL).equals(Constants.NOT_FILLED)){
+                        new AlertDialog.Builder(getActivity())
+                                .setMessage("You need to fill your placement details first")
+                                .setPositiveButton("Fill details", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                        fragmentTransaction.replace(R.id.container, new PlacementDetailsFragment());
+                                        fragmentTransaction.commit();
+                                    }
+                                })
+                                .setNegativeButton("Cancel", null)
+                                .setCancelable(true)
+                                .show();
+                    }
+
                     else{
                         databaseReference.child("users").child(mAuth.getUid()).addValueEventListener(new ValueEventListener(){
                             @Override
@@ -89,6 +108,10 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
                                 if(user.getFilledPlacement().equals("false")){
                                     progressDialog.dismiss();
                                     progressDialog.cancel();
+
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("filled_placement", Constants.NOT_FILLED);
+                                    editor.apply();
 
                                     new AlertDialog.Builder(getActivity())
                                             .setMessage("You need to fill your placement details first")
@@ -105,16 +128,31 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
                                             .show();
                                 }
                                 else{
-                                    progressDialog.cancel();
-                                    progressDialog.dismiss();
+                                    databaseReference.child("placements").child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot){
 
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putString("filled_placement", "yes");
-                                    editor.apply();
+                                            progressDialog.cancel();
+                                            progressDialog.dismiss();
 
-                                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                                    fragmentTransaction.replace(R.id.container, new FillLogbookFragment());
-                                    fragmentTransaction.commit();
+                                            PlacementObject placementObject = dataSnapshot.getValue(PlacementObject.class);
+
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            editor.putString("filled_placement", Constants.FILLED);
+                                            editor.putString("number_of_weeks", placementObject.getNumberOfWeeks());
+                                            editor.apply();
+
+                                            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                            fragmentTransaction.replace(R.id.container, new FillLogbookFragment());
+                                            fragmentTransaction.commit();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
                                 }
 
                             }

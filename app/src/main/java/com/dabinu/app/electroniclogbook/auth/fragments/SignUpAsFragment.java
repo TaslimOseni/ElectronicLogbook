@@ -77,7 +77,7 @@ public class SignUpAsFragment extends Fragment implements AuthActivity.IOnBackPr
                     sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
                     editor = sharedPreferences.edit();
 
-                    editor.putString("type_of_user", (String) signupas.getSelectedItem());
+                    editor.putString("type", (String) signupas.getSelectedItem());
                     editor.apply();
 
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();

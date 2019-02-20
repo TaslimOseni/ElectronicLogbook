@@ -26,8 +26,11 @@ import android.widget.Toast;
 
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.auth.AuthActivity;
+import com.dabinu.app.electroniclogbook.dept_supervisor.DeptSupervisorActivity;
+import com.dabinu.app.electroniclogbook.ind_supervisor.IndSupervisorActivity;
 import com.dabinu.app.electroniclogbook.models.User;
 import com.dabinu.app.electroniclogbook.student.StudentActivity;
+import com.dabinu.app.electroniclogbook.utils.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -64,6 +67,7 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
     String final_email;
     User final_user;
 
+
     public SignupNextFragment(){
         // Required empty public constructor
     }
@@ -76,7 +80,7 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
 
         sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
 
-        user_type = sharedPreferences.getString("type_of_user", "");
+        user_type = sharedPreferences.getString("type", "");
 
         stud_name = sharedPreferences.getString("stud_name", "");
         stud_email = sharedPreferences.getString("stud_email", "");
@@ -155,20 +159,19 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
                                                 if(task.isSuccessful()){
 
                                                     switch(user_type){
-                                                        case "Student":
+                                                        case Constants.STUDENT:
                                                             final_email = stud_email;
                                                             final_user = new User(user_type, stud_name, stud_email, stud_matric, stud_level, stud_faculty, stud_dept, "false", photo_url);
                                                             break;
-                                                        case "Department supervisor":
+                                                        case Constants.DEPARTMENTAL_SUPERVISOR:
                                                             final_email = dept_email;
                                                             final_user = new User(user_type, dept_name, dept_email, dept_faculty, dept_dept, dept_staffID, photo_url);
                                                             break;
-                                                        case "Industrial supervisor":
+                                                        case Constants.INDUSTRIAL_SUPERVISOR:
                                                             final_email = ind_email;
                                                             final_user = new User(user_type, ind_name, ind_email, ind_phone, ind_rank, ind_staffID, "some", "extraSome", "extraTwo", photo_url);
                                                             break;
                                                     }
-
                                                     progressDialog.setMessage("Creating account...");
                                                     progressDialog.setCancelable(false);
                                                     progressDialog.show();
@@ -179,22 +182,43 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
                                                             if(task.isSuccessful()){
 
                                                                 progressDialog.setMessage("Uploading data...");
-                                                                databaseReference.child("users").child(mAuth.getUid()).setValue(final_user);
-                                                                try{
-                                                                    Thread.sleep(2000);
-                                                                }
-                                                                catch(Exception e){
+                                                                databaseReference.child("users").child(mAuth.getUid()).setValue(final_user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<Void> task){
+                                                                        progressDialog.cancel();
+                                                                        progressDialog.dismiss();
 
-                                                                }
-                                                                progressDialog.cancel();
-                                                                progressDialog.dismiss();
+                                                                        if(task.isSuccessful()){
 
-                                                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                                            SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                                                                editor.putString("login", "true");
-                                                                editor.apply();
+                                                                            editor.putString("login", Constants.LOGGED_IN);
+                                                                            editor.apply();
 
-                                                                startActivity(new Intent(getActivity().getApplicationContext(), StudentActivity.class)); }
+                                                                            switch(user_type){
+                                                                                case Constants.STUDENT:
+                                                                                    startActivity(new Intent(getActivity().getApplicationContext(), StudentActivity.class));
+                                                                                    break;
+                                                                                case Constants.DEPARTMENTAL_SUPERVISOR:
+                                                                                    startActivity(new Intent(getActivity().getApplicationContext(), DeptSupervisorActivity.class));
+                                                                                    break;
+                                                                                case Constants.INDUSTRIAL_SUPERVISOR:
+                                                                                    startActivity(new Intent(getActivity().getApplicationContext(), IndSupervisorActivity.class));
+                                                                                    break;
+                                                                            }
+                                                                        }
+                                                                        else{
+                                                                            new AlertDialog.Builder(getActivity())
+                                                                                    .setMessage("Failed, try again")
+                                                                                    .setCancelable(true)
+                                                                                    .setPositiveButton("Okay", null)
+                                                                                    .show();
+                                                                        }
+                                                                    }
+                                                                });
+
+
+                                                            }
 
                                                             else{
                                                                 progressDialog.cancel();

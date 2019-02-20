@@ -102,7 +102,7 @@ public class FillLogbookFragment extends Fragment implements StudentActivity.IOn
         week = view.findViewById(R.id.week);
         ArrayList<String> numb = new ArrayList<>();
         numb.add("Week");
-        for(int i = 1; i <= Integer.parseInt(sharedPreferences.getString("weeks", "6")); i++){
+        for(int i = 1; i <= Integer.parseInt(sharedPreferences.getString("number_of_weeks", "6")); i++){
             numb.add(String.format("Week %d", i));
         }
         ArrayAdapter arrayAdapter1 = new ArrayAdapter(getActivity().getApplicationContext(), R.layout.short_spinner, numb);
@@ -160,18 +160,14 @@ public class FillLogbookFragment extends Fragment implements StudentActivity.IOn
                     progressDialog.setCancelable(false);
                     progressDialog.show();
 
-                    databaseReference.child("logs").child(mAuth.getUid()).child(((String) week.getSelectedItem()).split(" ")[0]).child(((String) day.getSelectedItem())).setValue(new Log(((String) week.getSelectedItem()).split(" ")[0], (String) day.getSelectedItem(), activity.getText().toString().trim(), comment.getText().toString().trim())).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    databaseReference.child("logs").child(mAuth.getUid()).child(((String) week.getSelectedItem()).split(" ")[1]).child(((String) day.getSelectedItem())).setValue(new Log(((String) week.getSelectedItem()).split(" ")[0], (String) day.getSelectedItem(), activity.getText().toString().trim(), comment.getText().toString().trim())).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 progressDialog.cancel();
                                 progressDialog.dismiss();
 
-                                Toast.makeText(getActivity().getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
-
-                                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                                fragmentTransaction.replace(R.id.container, new HomeFragment());
-                                fragmentTransaction.commit();
+                                Toast.makeText(getActivity().getApplicationContext(), "Successfully updated", Toast.LENGTH_LONG).show();
                             }
                             else{
 
@@ -208,6 +204,8 @@ public class FillLogbookFragment extends Fragment implements StudentActivity.IOn
                     comment.setText(log.getComment());
                 }
                 catch(Exception e){
+                    activity.setText("");
+                    comment.setText("");
                     progressDialog.dismiss();
                     progressDialog.cancel();
                 }

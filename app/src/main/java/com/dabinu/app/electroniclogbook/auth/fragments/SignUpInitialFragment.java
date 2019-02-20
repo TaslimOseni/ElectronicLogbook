@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.auth.AuthActivity;
+import com.dabinu.app.electroniclogbook.utils.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -46,8 +47,8 @@ public class SignUpInitialFragment extends Fragment implements AuthActivity.IOnB
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+
         View view = inflater.inflate(R.layout.fragment_sign_up_initial, container, false);
 
         progressDialog = new ProgressDialog(getActivity());
@@ -68,29 +69,30 @@ public class SignUpInitialFragment extends Fragment implements AuthActivity.IOnB
         editor = sharedPreferences.edit();
 
         header = view.findViewById(R.id.header);
-        header.setText(sharedPreferences.getString("type_of_user", ""));
+        header.setText(sharedPreferences.getString("type", ""));
 
         student = view.findViewById(R.id.student);
         ind_supervisor = view.findViewById(R.id.ind_supervisor);
         dept_supervisor = view.findViewById(R.id.dept_supervisor);
 
 
-        switch(sharedPreferences.getString("type_of_user", "")){
-            case "Student":
+        switch(sharedPreferences.getString("type", "")){
+            case Constants.STUDENT:
                 student.setVisibility(View.VISIBLE);
                 ind_supervisor.setVisibility(View.GONE);
                 dept_supervisor.setVisibility(View.GONE);
                 break;
-            case "Department supervisor":
+            case Constants.DEPARTMENTAL_SUPERVISOR:
                 student.setVisibility(View.GONE);
                 ind_supervisor.setVisibility(View.VISIBLE);
                 dept_supervisor.setVisibility(View.GONE);
                 break;
-            case "Industrial supervisor":
+            case Constants.INDUSTRIAL_SUPERVISOR:
                 student.setVisibility(View.GONE);
                 ind_supervisor.setVisibility(View.GONE);
                 dept_supervisor.setVisibility(View.VISIBLE);
                 break;
+
             default:
 
         }
