@@ -84,13 +84,13 @@ public class SignUpInitialFragment extends Fragment implements AuthActivity.IOnB
                 break;
             case Constants.DEPARTMENTAL_SUPERVISOR:
                 student.setVisibility(View.GONE);
-                ind_supervisor.setVisibility(View.VISIBLE);
-                dept_supervisor.setVisibility(View.GONE);
+                ind_supervisor.setVisibility(View.GONE);
+                dept_supervisor.setVisibility(View.VISIBLE);
                 break;
             case Constants.INDUSTRIAL_SUPERVISOR:
                 student.setVisibility(View.GONE);
-                ind_supervisor.setVisibility(View.GONE);
-                dept_supervisor.setVisibility(View.VISIBLE);
+                ind_supervisor.setVisibility(View.VISIBLE);
+                dept_supervisor.setVisibility(View.GONE);
                 break;
 
             default:

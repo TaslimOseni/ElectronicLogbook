@@ -1,6 +1,7 @@
 package com.dabinu.app.electroniclogbook.student.fragments;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +49,7 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
     DatabaseReference databaseReference;
     ProgressDialog progressDialog;
     SharedPreferences sharedPreferences;
+    Activity activity;
 
     public HomeFragment(){
 
@@ -63,6 +66,8 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         progressDialog = new ProgressDialog(getActivity());
+
+        activity = getActivity();
 
 
 
@@ -85,6 +90,10 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
                     }
 
                     else if(sharedPreferences.getString("filled_placement", Constants.DEFAULT_FILL).equals(Constants.NOT_FILLED)){
+
+                        progressDialog.cancel();
+                        progressDialog.dismiss();
+
                         new AlertDialog.Builder(getActivity())
                                 .setMessage("You need to fill your placement details first")
                                 .setPositiveButton("Fill details", new DialogInterface.OnClickListener() {
@@ -96,15 +105,17 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
                                     }
                                 })
                                 .setNegativeButton("Cancel", null)
-                                .setCancelable(true)
+                                .setCancelable(false)
                                 .show();
                     }
 
                     else{
                         databaseReference.child("users").child(mAuth.getUid()).addValueEventListener(new ValueEventListener(){
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot){
                                 User user = dataSnapshot.getValue(User.class);
+                                Log.d("DEBUG_ATTACK", user.getFilledPlacement());
+
                                 if(user.getFilledPlacement().equals("false")){
                                     progressDialog.dismiss();
                                     progressDialog.cancel();
@@ -118,6 +129,11 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
                                             .setPositiveButton("Fill details", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                    editor.putString("statuigba", "gba");
+                                                    editor.apply();
+
                                                     FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                                                     fragmentTransaction.replace(R.id.container, new PlacementDetailsFragment());
                                                     fragmentTransaction.commit();
@@ -128,30 +144,32 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
                                             .show();
                                 }
                                 else{
-                                    databaseReference.child("placements").child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot){
+                                    if(!(sharedPreferences.getString("statuigba", "no_gba").equals("gba"))){
+                                        databaseReference.child("placements").child(mAuth.getUid()).addValueEventListener(new ValueEventListener(){
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot){
 
-                                            progressDialog.cancel();
-                                            progressDialog.dismiss();
+                                                progressDialog.cancel();
+                                                progressDialog.dismiss();
 
-                                            PlacementObject placementObject = dataSnapshot.getValue(PlacementObject.class);
+                                                PlacementObject placementObject = dataSnapshot.getValue(PlacementObject.class);
 
-                                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                                            editor.putString("filled_placement", Constants.FILLED);
-                                            editor.putString("number_of_weeks", placementObject.getNumberOfWeeks());
-                                            editor.apply();
+                                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                editor.putString("filled_placement", Constants.FILLED);
+                                                editor.putString("number_of_weeks", placementObject.getNumberOfWeeks());
+                                                editor.apply();
 
-                                            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                                            fragmentTransaction.replace(R.id.container, new FillLogbookFragment());
-                                            fragmentTransaction.commit();
-                                        }
+                                                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                                fragmentTransaction.replace(R.id.container, new FillLogbookFragment());
+                                                fragmentTransaction.commit();
+                                            }
 
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                        }
-                                    });
+                                            }
+                                        });
+                                    }
 
                                 }
 
@@ -258,9 +276,10 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
                             SharedPreferences sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                            editor.putString("login", "false");
-                            editor.putString("weeks", "6");
-                            editor.putString("filled_placement", "no");
+                            editor.putString("login", Constants.NOT_LOGGED_IN);
+                            editor.putString("weeks", Constants.DEFAULT_FILL);
+                            editor.putString("filled_placement", Constants.DEFAULT_FILL);
+                            editor.putString("statuigba", "no_gba");
                             editor.apply();
 
                             progressDialog.cancel();

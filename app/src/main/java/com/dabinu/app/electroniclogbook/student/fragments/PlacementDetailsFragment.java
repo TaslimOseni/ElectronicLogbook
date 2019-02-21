@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.models.PlacementObject;
 import com.dabinu.app.electroniclogbook.student.StudentActivity;
+import com.dabinu.app.electroniclogbook.utils.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -143,7 +144,7 @@ public class PlacementDetailsFragment extends Fragment implements StudentActivit
                             if(task.isSuccessful()){
                                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("filled_placement", "yes");
+                                editor.putString("filled_placement", Constants.FILLED);
                                 editor.putString("number_of_weeks", ((String) numWeeks.getSelectedItem()).split(" ")[0]);
                                 editor.apply();
 

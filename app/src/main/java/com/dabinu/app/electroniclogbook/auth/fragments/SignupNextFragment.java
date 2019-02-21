@@ -48,7 +48,7 @@ import com.google.firebase.storage.UploadTask;
  */
 public class SignupNextFragment extends Fragment implements AuthActivity.IOnBackPressed{
 
-    ImageButton image;
+    ImageButton image, back;
     EditText password1, password2;
     CardView signup;
     boolean hasPicture = false;
@@ -79,6 +79,16 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
         View view = inflater.inflate(R.layout.fragment_signup_next, container, false);
 
         sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
+
+        back = view.findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container, new SignUpInitialFragment());
+                fragmentTransaction.commit();
+            }
+        });
 
         user_type = sharedPreferences.getString("type", "");
 
@@ -235,7 +245,7 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
                                                                 }
                                                                 catch(Exception e) {
                                                                     new AlertDialog.Builder(getActivity())
-                                                                            .setMessage("Failed, try again")
+                                                                            .setMessage("Incorrect email format")
                                                                             .setCancelable(true)
                                                                             .setPositiveButton("Okay", null)
                                                                             .show();

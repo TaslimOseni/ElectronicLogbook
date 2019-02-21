@@ -1,5 +1,6 @@
 package com.dabinu.app.electroniclogbook.auth;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -17,12 +18,13 @@ public class AuthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString("hasFilledPlacement", Constants.DEFAULT_FILL);
+        editor.putString("login", Constants.NOT_LOGGED_IN);
         editor.putString("weeks", Constants.DEFAULT_FILL);
-        editor.putString("type", Constants.STUDENT);
+        editor.putString("filled_placement", Constants.DEFAULT_FILL);
+        editor.putString("statuigba", "no_gba");
         editor.apply();
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

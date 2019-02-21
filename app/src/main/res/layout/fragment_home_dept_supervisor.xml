@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:text="Supervisor dashboard"
             android:textColor="#FFFFFF"
-            android:textSize="21sp"
+            android:textSize="18sp"
             android:gravity="center"
             android:layout_marginStart="15dp"
             android:textStyle="bold"/>
@@ -50,7 +50,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/fill_logbook">
+                    android:id="@+id/students">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:scaleType="fitXY"
-                            android:id="@+id/pen"
+                            android:id="@+id/stud"
                             android:src="@drawable/students"
                             android:background="@android:color/transparent"
                             android:layout_gravity="center"/>

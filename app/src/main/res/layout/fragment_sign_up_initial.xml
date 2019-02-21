@@ -204,7 +204,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:hint="Full name"
@@ -216,7 +216,7 @@
                     android:layout_marginTop="15dp"/>
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:hint="Email"
@@ -228,7 +228,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:hint="Phone number"
@@ -240,7 +240,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:hint="Rank"
@@ -251,7 +251,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:hint="Staff ID"
@@ -314,7 +314,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:hint="Full name"
@@ -327,7 +327,7 @@
 
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:hint="Email"
@@ -339,7 +339,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:singleLine="true"
@@ -350,7 +350,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:id="@+id/dept_dept"
@@ -361,7 +361,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <EditText
-                    android:layout_width="170dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:id="@+id/dept_staffID"
