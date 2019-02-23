@@ -1,8 +1,10 @@
 package com.dabinu.app.electroniclogbook.dept_supervisor.fragments;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -10,6 +12,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +22,16 @@ import android.widget.Toast;
 
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.auth.AuthActivity;
+import com.dabinu.app.electroniclogbook.dept_supervisor.DeptSupervisorActivity;
+import com.dabinu.app.electroniclogbook.exit.ExitActivity;
 import com.dabinu.app.electroniclogbook.utils.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment{
+
+public class HomeFragment extends Fragment implements DeptSupervisorActivity.IOnBackPressed{
 
     RelativeLayout students, profile, about, signOut;
     ImageButton stud, person, abt, sout;
@@ -52,7 +58,7 @@ public class HomeFragment extends Fragment{
 
         progressDialog = new ProgressDialog(getActivity());
 
-        students = view.findViewById(R.id.student);
+        students = view.findViewById(R.id.students);
         stud = view.findViewById(R.id.stud);
 
         profile = view.findViewById(R.id.profile);
@@ -64,6 +70,34 @@ public class HomeFragment extends Fragment{
         signOut = view.findViewById(R.id.signout);
         sout = view.findViewById(R.id.sout);
 
+
+        students.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isNetworkAvailable(getActivity().getApplicationContext())){
+                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.container, new StudentsFragment());
+                    fragmentTransaction.commit();
+                }
+                else{
+                    Toast.makeText(getActivity().getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isNetworkAvailable(getActivity().getApplicationContext())){
+                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.container, new ProfileFragment());
+                    fragmentTransaction.commit();
+                }
+                else{
+                    Toast.makeText(getActivity().getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
 
         signOut.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +139,15 @@ public class HomeFragment extends Fragment{
                 else{
                     Toast.makeText(getActivity().getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container, new AboutFragment());
+                fragmentTransaction.commit();
             }
         });
 
@@ -150,5 +193,20 @@ public class HomeFragment extends Fragment{
         return activeNetworkInfo != null;
     }
 
+    @Override
+    public boolean onBackPressed(){
+        new AlertDialog.Builder(getActivity())
+                .setMessage("Are you sure you want to exit?")
+                .setCancelable(true)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ExitActivity.exit(getActivity().getApplicationContext());
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+        return true;
+    }
 
 }

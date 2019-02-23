@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dept_supervisor.fragments.AddNewStudentFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:id="@+id/top"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            android:id="@+id/back"
+            android:background="@android:color/transparent"
+            android:padding="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Add new student"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"/>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_below="@+id/top"
+        android:id="@+id/searchLayout"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Enter matric number"
+            android:backgroundTint="#AAAAAA"
+            android:id="@+id/matric"
+            android:maxLength="12"
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:layout_toStartOf="@+id/go"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:text="Search"
+            android:textAllCaps="false"
+            android:id="@+id/go"/>
+
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/user"
+        android:visibility="gone"
+        android:layout_below="@+id/searchLayout"
+        android:background="#EEEEEE">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center|start"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            android:id="@+id/name"
+            android:textSize="14sp"
+            android:text="Taslim Oseni"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lap"
+            android:layout_below="@+id/name">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Computer Engineering"
+                android:id="@+id/department"
+                android:textSize="11sp"
+                android:layout_centerVertical="true"
+                android:textColor="#000000"
+                android:paddingBottom="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Technology"
+                android:textSize="11sp"
+                android:id="@+id/faculty"
+                android:textColor="#000000"
+                android:paddingBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/lap">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="#000000">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF"
+                    android:layout_margin="0.5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Claim student"
+                        android:id="@+id/claimStud"
+                        android:gravity="center"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

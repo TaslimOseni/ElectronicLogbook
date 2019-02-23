@@ -103,6 +103,9 @@ public class LoginFragment extends Fragment implements AuthActivity.IOnBackPress
                 else if(password.getText().toString().trim().equals("")){
                     password.setError("This field is required");
                 }
+                else if(password.getText().toString().trim().length() < 6){
+                    password.setError("Password cannot be less than 6 characters");
+                }
                 else{
                     progressDialog.setMessage("Logging in");
                     progressDialog.setCancelable(false);

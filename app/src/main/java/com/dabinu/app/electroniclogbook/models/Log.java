@@ -6,13 +6,15 @@ package com.dabinu.app.electroniclogbook.models;
 public class Log{
 
     public String week, day, activity, comment;
+    public boolean filledAlready;
 
 
-    public Log(String week, String day, String activity, String comment){
+    public Log(String week, String day, String activity, String comment, boolean filledAlready){
         this.week = week;
         this.day = day;
         this.activity = activity;
         this.comment = comment;
+        this.filledAlready = filledAlready;
     }
 
     public Log(){
@@ -34,5 +36,9 @@ public class Log{
 
     public String getComment() {
         return comment;
+    }
+
+    public boolean isFilledAlready() {
+        return filledAlready;
     }
 }

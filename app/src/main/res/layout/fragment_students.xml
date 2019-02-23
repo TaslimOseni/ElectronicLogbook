@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dept_supervisor.fragments.StudentsFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:id="@+id/top"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            android:id="@+id/back"
+            android:background="@android:color/transparent"
+            android:padding="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="All students"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#000000"
+        android:id="@+id/add_new"
+        android:layout_margin="15dp"
+        android:layout_below="@+id/top">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:text="Add new student"
+            android:id="@+id/add_new_student"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_margin="0.5dp" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:layout_below="@+id/add_new"
+        android:id="@+id/recyclerView">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You have no students"
+        android:id="@+id/no"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:textSize="14sp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add_white"
+        android:id="@+id/fab_add_new"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp" />
+
+</RelativeLayout>

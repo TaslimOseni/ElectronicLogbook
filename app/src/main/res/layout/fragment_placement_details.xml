@@ -63,7 +63,7 @@
                 android:singleLine="true"
                 android:textSize="15sp"
                 android:id="@+id/companyAddress"
-                android:hint="Address" />
+                android:hint="Company Address" />
 
             <EditText
                 android:layout_width="match_parent"

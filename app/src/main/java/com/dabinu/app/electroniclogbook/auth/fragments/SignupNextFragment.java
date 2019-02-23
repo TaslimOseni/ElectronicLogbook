@@ -145,7 +145,16 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
                     if(!hasPicture){
                         Toast.makeText(getActivity().getApplicationContext(), "You must select a picture", Toast.LENGTH_SHORT).show();
                     }
-                    else if((password1.getText().toString().trim().equals(password2.getText().toString().trim())) && password1.getText().toString().trim().length() > 5){
+                    else if(password1.getText().toString().trim().length() < 6){
+                        password1.setError("Password cannot be less than 6 characters");
+                    }
+                    else if(password2.getText().toString().trim().length() < 6){
+                        password2.setError("Password cannot be less than 6 characters");
+                    }
+                    else if(!(password1.getText().toString().trim().equals(password2.getText().toString().trim()))){
+                        Toast.makeText(getActivity().getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
+                    }
+                    else{
                         progressDialog.setMessage("Uploading photo...");
                         progressDialog.setCancelable(false);
                         progressDialog.show();
@@ -265,15 +274,6 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
                                         });
                             }
                         });
-                    }
-
-
-                    else if(password1.getText().toString().trim().length() > 0 && password1.getText().toString().trim().length() < 6){
-                        Toast.makeText(getActivity().getApplicationContext(), "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
-                    }
-
-                    else{
-                        Toast.makeText(getActivity().getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
