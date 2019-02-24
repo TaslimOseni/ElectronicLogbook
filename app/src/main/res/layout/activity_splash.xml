@@ -6,20 +6,6 @@
     tools:context=".splash.SplashActivity">
 
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#000000"
-        android:alpha="0.6">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/black_intern"
-            android:scaleType="centerCrop" />
-
-    </FrameLayout>
-
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -27,23 +13,24 @@
         android:layout_centerInParent="true"
         android:orientation="vertical">
 
-        <TextView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="L"
+            android:src="@drawable/intern"
             android:textColor="#000000"
             android:layout_gravity="center"
-            android:background="@drawable/circle"
+            android:backgroundTint="@android:color/transparent"
             android:gravity="center"
-            android:textSize="45sp"
-            android:layout_marginTop="20dp" />
+            android:textSize="45sp" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Your Electronic Logbook"
-            android:textSize="16sp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"/>
 

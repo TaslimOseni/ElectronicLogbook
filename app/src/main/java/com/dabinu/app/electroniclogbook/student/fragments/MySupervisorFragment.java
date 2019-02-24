@@ -83,7 +83,7 @@ public class MySupervisorFragment extends Fragment implements StudentActivity.IO
             @Override
             public void onClick(View view) {
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.container, new com.dabinu.app.electroniclogbook.dept_supervisor.fragments.HomeFragment());
+                fragmentTransaction.replace(R.id.container, new HomeFragment());
                 fragmentTransaction.commit();
             }
         });
