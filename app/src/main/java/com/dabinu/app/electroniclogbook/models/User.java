@@ -5,14 +5,14 @@ package com.dabinu.app.electroniclogbook.models;
  */
 public class User{
 
-    public String type, fullname, email, matric, level, faculty, department, staffID, phone, rank, filledPlacement, photo_url;
+    public String type, fullname, email, matric, level, faculty, department, staffID, phone, rank, filledPlacement, photo_url, supervisor_id;
 
     public User(){
 
     }
 
 
-    public User(String type, String fullname, String email, String matric, String level, String faculty, String department, String filledPlacement, String photo_url){
+    public User(String type, String fullname, String email, String matric, String level, String faculty, String department, String filledPlacement, String photo_url, String supervisor_id, String extra){
         this.type = type;
         this.fullname = fullname;
         this.email = email;
@@ -22,6 +22,7 @@ public class User{
         this.department = department;
         this.filledPlacement = filledPlacement;
         this.photo_url = photo_url;
+        this.supervisor_id = supervisor_id;
     }
 
     public User(String type, String fullname, String email, String faculty, String department, String staffID, String photo_url){
@@ -91,5 +92,9 @@ public class User{
 
     public String getPhoto_url() {
         return photo_url;
+    }
+
+    public String getSupervisor_id() {
+        return supervisor_id;
     }
 }

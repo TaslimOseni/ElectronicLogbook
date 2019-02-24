@@ -213,15 +213,14 @@ public class HomeFragment extends Fragment implements StudentActivity.IOnBackPre
         supervisor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "Not ready yet", Toast.LENGTH_SHORT).show();
-//                if(isNetworkAvailable(getActivity().getApplicationContext())){
-//                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                    fragmentTransaction.replace(R.id.container, new SupervisorFragment());
-//                    fragmentTransaction.commit();
-//                }
-//                else{
-//                    Toast.makeText(getActivity().getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
-//                }
+                if(isNetworkAvailable(getActivity().getApplicationContext())){
+                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.container, new MySupervisorFragment());
+                    fragmentTransaction.commit();
+                }
+                else{
+                    Toast.makeText(getActivity().getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

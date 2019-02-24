@@ -180,7 +180,7 @@ public class SignupNextFragment extends Fragment implements AuthActivity.IOnBack
                                                     switch(user_type){
                                                         case Constants.STUDENT:
                                                             final_email = stud_email;
-                                                            final_user = new User(user_type, stud_name, stud_email, stud_matric, stud_level, stud_faculty, stud_dept, "false", photo_url);
+                                                            final_user = new User(user_type, stud_name, stud_email, stud_matric, stud_level, stud_faculty, stud_dept, "false", photo_url, Constants.NOT_FILLED, "extra");
                                                             break;
                                                         case Constants.DEPARTMENTAL_SUPERVISOR:
                                                             final_email = dept_email;

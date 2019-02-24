@@ -51,6 +51,7 @@ public class FillLogbookFragment extends Fragment implements StudentActivity.IOn
     FirebaseAuth mAuth;
     DatabaseReference databaseReference;
     ProgressDialog progressDialog;
+    boolean shouldSubmit = true;
 
 
     public FillLogbookFragment() {
@@ -143,37 +144,51 @@ public class FillLogbookFragment extends Fragment implements StudentActivity.IOn
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(comment.getText().toString().trim().equals("")){
-                    comment.setError("This field cannot be empty");
-                }
-                else if(activity.getText().toString().trim().equals("")){
-                    activity.setError("This field cannot be empty");
-                }
-                else if(((String) week.getSelectedItem()).equals("Week")){
-                    Toast.makeText(getActivity().getApplicationContext(), "Select a valid week", Toast.LENGTH_SHORT).show();
-                }
-                else if(((String) day.getSelectedItem()).equals("Day")){
-                    Toast.makeText(getActivity().getApplicationContext(), "Select a valid day", Toast.LENGTH_SHORT).show();
+                if(isNetworkAvailable(getActivity().getApplicationContext())){
+                    if(shouldSubmit){
+                        if(comment.getText().toString().trim().equals("")){
+                            comment.setError("This field cannot be empty");
+                        }
+                        else if(activity.getText().toString().trim().equals("")){
+                            activity.setError("This field cannot be empty");
+                        }
+                        else if(((String) week.getSelectedItem()).equals("Week")){
+                            Toast.makeText(getActivity().getApplicationContext(), "Select a valid week", Toast.LENGTH_SHORT).show();
+                        }
+                        else if(((String) day.getSelectedItem()).equals("Day")){
+                            Toast.makeText(getActivity().getApplicationContext(), "Select a valid day", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            progressDialog.setMessage("Uploading..");
+                            progressDialog.setCancelable(false);
+                            progressDialog.show();
+
+                            databaseReference.child("logs").child(mAuth.getUid()).child(((String) week.getSelectedItem()).split(" ")[1]).child(((String) day.getSelectedItem())).setValue(new Log(((String) week.getSelectedItem()).split(" ")[0], (String) day.getSelectedItem(), activity.getText().toString().trim(), comment.getText().toString().trim(), true)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        progressDialog.cancel();
+                                        progressDialog.dismiss();
+
+                                        Toast.makeText(getActivity().getApplicationContext(), String.format("%s, %s successfully updated", (String) day.getSelectedItem(), (String) week.getSelectedItem()), Toast.LENGTH_LONG).show();
+
+                                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                        fragmentTransaction.replace(R.id.container, new HomeFragment());
+                                        fragmentTransaction.commit();
+                                    }
+                                    else{
+
+                                    }
+                                }
+                            });
+                        }
+                    }
+                    else{
+                        Toast.makeText(getActivity().getApplicationContext(),"This day has already been filled and cannot be edited", Toast.LENGTH_LONG).show();
+                    }
                 }
                 else{
-                    progressDialog.setMessage("Uploading..");
-                    progressDialog.setCancelable(false);
-                    progressDialog.show();
-
-                    databaseReference.child("logs").child(mAuth.getUid()).child(((String) week.getSelectedItem()).split(" ")[1]).child(((String) day.getSelectedItem())).setValue(new Log(((String) week.getSelectedItem()).split(" ")[0], (String) day.getSelectedItem(), activity.getText().toString().trim(), comment.getText().toString().trim())).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                progressDialog.cancel();
-                                progressDialog.dismiss();
-
-                                Toast.makeText(getActivity().getApplicationContext(), "Successfully updated", Toast.LENGTH_LONG).show();
-                            }
-                            else{
-
-                            }
-                        }
-                    });
+                    Toast.makeText(getActivity().getApplicationContext(),"Check your internet connection", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -191,33 +206,42 @@ public class FillLogbookFragment extends Fragment implements StudentActivity.IOn
 
 
     public void fillInDetails(){
+
         progressDialog.setMessage("Please wait..");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        databaseReference.child("logs").child(mAuth.getUid()).child(((String) week.getSelectedItem()).split(" ")[0]).child(((String) day.getSelectedItem())).addValueEventListener(new ValueEventListener() {
+        databaseReference.child("logs").child(mAuth.getUid()).child(((String) week.getSelectedItem()).split(" ")[1]).child(((String) day.getSelectedItem())).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 try{
                     Log log = dataSnapshot.getValue(Log.class);
+                    if(log == null){
+                    }
                     activity.setText(log.getActivity());
                     comment.setText(log.getComment());
+                    if(log.isFilledAlready()){
+                        shouldSubmit = false;
+                    }
                 }
                 catch(Exception e){
                     activity.setText("");
                     comment.setText("");
+                    shouldSubmit = true;
                     progressDialog.dismiss();
                     progressDialog.cancel();
                 }
+
 
                 progressDialog.dismiss();
                 progressDialog.cancel();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError){
                 progressDialog.dismiss();
                 progressDialog.cancel();
+                shouldSubmit = true;
             }
         });
     }

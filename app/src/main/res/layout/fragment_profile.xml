@@ -211,7 +211,7 @@
                 android:layout_marginStart="20dp"
                 android:textSize="16sp"
                 android:id="@+id/departmental_supervisor"
-                android:text=""/>
+                android:text="None yet"/>
 
             <View
                 android:layout_width="match_parent"
