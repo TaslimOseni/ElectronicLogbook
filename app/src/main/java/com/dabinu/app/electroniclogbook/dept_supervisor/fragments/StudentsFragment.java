@@ -1,6 +1,7 @@
 package com.dabinu.app.electroniclogbook.dept_supervisor.fragments;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -46,6 +47,7 @@ public class StudentsFragment extends Fragment implements DeptSupervisorActivity
     FirebaseAuth mAuth;
     DatabaseReference databaseReference;
     ArrayList<User> allUsers;
+    Activity activity;
 
 
     public StudentsFragment() {
@@ -70,6 +72,7 @@ public class StudentsFragment extends Fragment implements DeptSupervisorActivity
 
 
     public void init(View view){
+        activity = getActivity();
 
         allUsers = new ArrayList<>();
 
@@ -188,7 +191,7 @@ public class StudentsFragment extends Fragment implements DeptSupervisorActivity
                                     progressDialog.cancel();
                                     progressDialog.dismiss();
                                     Log.d("CHECK_POINT", "here10");
-                                    MyStudentsAdapter myStudentsAdapter = new MyStudentsAdapter(getActivity().getApplicationContext(), allUsers);
+                                    MyStudentsAdapter myStudentsAdapter = new MyStudentsAdapter(activity.getApplicationContext(), allUsers);
                                     myStudentsAdapter.setOnItemClickListener(new MyStudentsAdapter.ClickListener() {
                                         @Override
                                         public void onItemClick(int position, View v) {

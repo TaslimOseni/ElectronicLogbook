@@ -52,6 +52,7 @@ public class AddNewStudentFragment extends Fragment implements DeptSupervisorAct
     ArrayList<String> uselessStudents;
     RelativeLayout user_layout;
     boolean bool = false;
+    boolean canAdd = true;
 
     public AddNewStudentFragment(){
 
@@ -63,6 +64,7 @@ public class AddNewStudentFragment extends Fragment implements DeptSupervisorAct
         View view = inflater.inflate(R.layout.fragment_add_new_student, container, false);
 
         init(view);
+        fetchStudents();
 
         return view;
     }
@@ -70,6 +72,8 @@ public class AddNewStudentFragment extends Fragment implements DeptSupervisorAct
 
     public void init(View view){
         allStudents = new ArrayList<>();
+
+        uselessStudents = new ArrayList<>();
 
         back = view.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +133,11 @@ public class AddNewStudentFragment extends Fragment implements DeptSupervisorAct
                     allStudents.add(dataSnapshot1.getValue(User.class));
 
                     if(dataSnapshot1.getValue(User.class).getType().equals(Constants.STUDENT) && ((dataSnapshot1.getValue(User.class).getMatric()).toLowerCase()).equals((matric.getText().toString().trim()).toLowerCase())){
+                        canAdd = true;
+
+                        if(!(dataSnapshot1.getValue(User.class).getSupervisor_id().equals(Constants.NOT_FILLED))){
+                            canAdd = false;
+                        }
                         makeUserVisible(dataSnapshot1);
                         bool = true;
                         break;
@@ -171,31 +180,52 @@ public class AddNewStudentFragment extends Fragment implements DeptSupervisorAct
         claimStud.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressDialog.setMessage("Please wait...");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
+                if(!canAdd){
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage("This student already has a supervisor")
+                            .setCancelable(true)
+                            .setPositiveButton("Okay", null)
+                            .show();
+                }
+                else{
+                    progressDialog.setMessage("Please wait...");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
 
-                uselessStudents = new ArrayList<>();
+                    uselessStudents.add(dataSnapshot.getKey());
 
-                uselessStudents.add(dataSnapshot.getKey());
+                    databaseReference.child("users").child(dataSnapshot.getKey()).child("supervisor_id").setValue(mAuth.getUid()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                databaseReference.child("offsprings").child(mAuth.getUid()).setValue(new MyStudents(uselessStudents)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            progressDialog.cancel();
+                                            progressDialog.dismiss();
+                                            Toast.makeText(getActivity().getApplicationContext(), "Successful!", Toast.LENGTH_SHORT).show();
+                                            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                            fragmentTransaction.replace(R.id.container, new com.dabinu.app.electroniclogbook.dept_supervisor.fragments.StudentsFragment());
+                                            fragmentTransaction.commit();
 
-                fetchStudents();
-
-                databaseReference.child("offsprings").child(mAuth.getUid()).setValue(new MyStudents(uselessStudents)).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            progressDialog.cancel();
-                            progressDialog.dismiss();
-                            Toast.makeText(getActivity().getApplicationContext(), "Successful!", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else{
+                                            progressDialog.cancel();
+                                            progressDialog.dismiss();
+                                            Toast.makeText(getActivity().getApplicationContext(), "Failed!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            }
+                            else{
+                                progressDialog.cancel();
+                                progressDialog.dismiss();
+                                Toast.makeText(getActivity().getApplicationContext(), "Failed!", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else{
-                            progressDialog.cancel();
-                            progressDialog.dismiss();
-                            Toast.makeText(getActivity().getApplicationContext(), "Failed!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                    });
+                }
             }
         });
     }
@@ -222,8 +252,15 @@ public class AddNewStudentFragment extends Fragment implements DeptSupervisorAct
                 progressDialog.cancel();
                 progressDialog.dismiss();
                 new AlertDialog.Builder(getActivity())
-                        .setMessage("Failed")
-                        .setPositiveButton("Okay", null)
+                        .setMessage("Failed to fetch students")
+                        .setPositiveButton("Try again", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                fragmentTransaction.replace(R.id.container, new AddNewStudentFragment());
+                                fragmentTransaction.commit();
+                            }
+                        })
                         .setCancelable(false)
                         .show();
             }
