@@ -12,6 +12,7 @@ import com.dabinu.app.electroniclogbook.auth.AuthActivity;
 import com.dabinu.app.electroniclogbook.dept_supervisor.DeptSupervisorActivity;
 import com.dabinu.app.electroniclogbook.ind_supervisor.IndSupervisorActivity;
 import com.dabinu.app.electroniclogbook.student.StudentActivity;
+import com.dabinu.app.electroniclogbook.technical_officer.TechnicalOfficerActivity;
 import com.dabinu.app.electroniclogbook.utils.Constants;
 
 public class SplashActivity extends AppCompatActivity{
@@ -45,6 +46,9 @@ public class SplashActivity extends AppCompatActivity{
 
                         case Constants.INDUSTRIAL_SUPERVISOR:
                             startActivity(new Intent(getApplicationContext(), IndSupervisorActivity.class));
+                            break;
+                        case Constants.TECHNICAL_OFFICER:
+                            startActivity(new Intent(getApplicationContext(), TechnicalOfficerActivity.class));
                             break;
                     }
 

@@ -8,6 +8,7 @@ public class Constants{
     public static final String STUDENT = "Student";
     public static final String DEPARTMENTAL_SUPERVISOR = "Departmental Supervisor";
     public static final String INDUSTRIAL_SUPERVISOR = "Industrial Supervisor";
+    public static final String TECHNICAL_OFFICER = "Technical Officer";
 
     public static final String NOT_LOGGED_IN = "false";
     public static final String LOGGED_IN = "true";

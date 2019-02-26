@@ -45,7 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginFragment extends Fragment implements AuthActivity.IOnBackPressed{
 
     EditText email, password;
-    TextView signup;
+    TextView signup, techOfficer;
     CardView login;
     ImageButton back;
     ProgressDialog progressDialog;
@@ -62,6 +62,16 @@ public class LoginFragment extends Fragment implements AuthActivity.IOnBackPress
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         progressDialog = new ProgressDialog(getActivity());
+
+        techOfficer = view.findViewById(R.id.signupAsTechnicalOfficer);
+        techOfficer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container, new TechOfficerAuthFragment());
+                fragmentTransaction.commit();
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
