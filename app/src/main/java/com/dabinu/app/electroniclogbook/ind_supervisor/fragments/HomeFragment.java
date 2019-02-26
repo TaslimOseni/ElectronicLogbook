@@ -68,6 +68,16 @@ public class HomeFragment extends Fragment {
         signOut = view.findViewById(R.id.signout);
         sout = view.findViewById(R.id.sout);
 
+
+        students.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container, new com.dabinu.app.electroniclogbook.dept_supervisor.fragments.StudentsFragment());
+                fragmentTransaction.commit();
+            }
+        });
+
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
