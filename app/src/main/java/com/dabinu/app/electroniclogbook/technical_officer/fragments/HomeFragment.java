@@ -39,7 +39,7 @@ public class HomeFragment extends Fragment implements TechnicalOfficerActivity.I
             }
         });
 
-        view.findViewById(R.id.stud).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.sup).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();

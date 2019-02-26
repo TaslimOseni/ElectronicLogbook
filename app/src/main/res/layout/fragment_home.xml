@@ -20,16 +20,16 @@
         android:orientation="vertical">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Search for students"
+            android:text="Search for student"
             android:layout_gravity="center"
             android:id="@+id/stud"/>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Search for supervisors"
+            android:text="Search for supervisor"
             android:layout_gravity="center"
             android:id="@+id/sup"/>
 
