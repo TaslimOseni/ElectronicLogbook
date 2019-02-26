@@ -10,11 +10,12 @@ import android.view.ViewGroup;
 
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.dept_supervisor.DeptSupervisorActivity;
+import com.dabinu.app.electroniclogbook.ind_supervisor.IndSupervisorActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AboutFragment extends Fragment implements DeptSupervisorActivity.IOnBackPressed {
+public class AboutFragment extends Fragment implements IndSupervisorActivity.IOnBackPressed {
 
 
     public AboutFragment() {
