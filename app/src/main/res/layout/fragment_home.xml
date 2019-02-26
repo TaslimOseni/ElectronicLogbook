@@ -9,7 +9,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sign out"
+        android:layout_alignParentBottom="true"
         android:background="#000000"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search for students"
+            android:layout_gravity="center"
+            android:id="@+id/stud"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search for supervisors"
+            android:layout_gravity="center"
+            android:id="@+id/sup"/>
+
+    </LinearLayout>
+
 
 </RelativeLayout>
