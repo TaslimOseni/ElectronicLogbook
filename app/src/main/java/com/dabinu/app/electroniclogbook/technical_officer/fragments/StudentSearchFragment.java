@@ -3,7 +3,9 @@ package com.dabinu.app.electroniclogbook.technical_officer.fragments;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -11,16 +13,21 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.dabinu.app.electroniclogbook.R;
 import com.dabinu.app.electroniclogbook.dept_supervisor.fragments.AddNewStudentFragment;
+import com.dabinu.app.electroniclogbook.models.Log;
 import com.dabinu.app.electroniclogbook.models.MyStudents;
 import com.dabinu.app.electroniclogbook.models.User;
 import com.dabinu.app.electroniclogbook.technical_officer.TechnicalOfficerActivity;
@@ -53,6 +60,9 @@ public class StudentSearchFragment extends Fragment implements TechnicalOfficerA
     ProgressDialog progressDialog;
     DatabaseReference databaseReference;
     RelativeLayout user_layout, landing, profile;
+    LinearLayout sneakPeak;
+    Spinner week, day;
+    EditText activity, comment;
     boolean bool = false;
     int position = 1;
 
@@ -88,6 +98,12 @@ public class StudentSearchFragment extends Fragment implements TechnicalOfficerA
                 profile.setVisibility(View.GONE);
                 position = 1;
                 return true;
+            case 3:
+                title.setText("Student search");
+                landing.setVisibility(View.VISIBLE);
+                sneakPeak.setVisibility(View.GONE);
+                position = 1;
+                return true;
         }
 
         return false;
@@ -100,6 +116,8 @@ public class StudentSearchFragment extends Fragment implements TechnicalOfficerA
 
         landing = view.findViewById(R.id.landing);
         profile = view.findViewById(R.id.profile);
+
+        sneakPeak = view.findViewById(R.id.sneakPeek);
 
         stud_name = view.findViewById(R.id.stud_full_name);
         stud_email = view.findViewById(R.id.stud_email);
@@ -120,11 +138,19 @@ public class StudentSearchFragment extends Fragment implements TechnicalOfficerA
                     case 1:
                         fragmentTransaction.replace(R.id.container, new HomeFragment());
                         fragmentTransaction.commit();
+                        break;
                     case 2:
                         title.setText("Student search");
                         landing.setVisibility(View.VISIBLE);
                         profile.setVisibility(View.GONE);
                         position = 1;
+                        break;
+                    case 3:
+                        title.setText("Student search");
+                        landing.setVisibility(View.VISIBLE);
+                        sneakPeak.setVisibility(View.GONE);
+                        position = 1;
+                        break;
                 }
             }
         });
@@ -173,7 +199,7 @@ public class StudentSearchFragment extends Fragment implements TechnicalOfficerA
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot){
 
-                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                for(final DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
 
                     if(dataSnapshot1.getValue(User.class).getType().equals(Constants.STUDENT) && ((dataSnapshot1.getValue(User.class).getMatric()).toLowerCase()).equals((matric.getText().toString().trim()).toLowerCase())){
 
@@ -208,6 +234,66 @@ public class StudentSearchFragment extends Fragment implements TechnicalOfficerA
                             }
                         });
 
+                        viewLogs.setOnClickListener(new View.OnClickListener(){
+                            @Override
+                            public void onClick(View view){
+
+                                position = 3;
+                                title.setText("Logs");
+
+                                landing.setVisibility(View.GONE);
+                                sneakPeak.setVisibility(View.VISIBLE);
+
+                                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
+
+                                day = view.findViewById(R.id.day);
+                                ArrayAdapter arrayAdapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.day, R.layout.short_spinner);
+                                day.setAdapter(arrayAdapter);
+
+                                week = view.findViewById(R.id.week);
+                                ArrayList<String> numb = new ArrayList<>();
+                                numb.add("Week");
+                                for(int i = 1; i <= 8; i++){
+                                    numb.add(String.format("Week %d", i));
+                                }
+                                ArrayAdapter arrayAdapter1 = new ArrayAdapter(getActivity().getApplicationContext(), R.layout.short_spinner, numb);
+                                week.setAdapter(arrayAdapter1);
+
+                                activity = view.findViewById(R.id.activity);
+                                comment = view.findViewById(R.id.comment);
+
+
+                                day.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                        if(i != 0 && !(((String) week.getSelectedItem()).equals("Week"))){
+                                            fillInDetails(dataSnapshot1.getKey());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                    }
+                                });
+
+
+                                week.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                        if(i != 0 && !(((String) day.getSelectedItem()).equals("Day"))){
+                                            fillInDetails(dataSnapshot1.getKey());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                    }
+                                });
+                            }
+                        });
+
                         bool = true;
                         break;
                     }
@@ -235,5 +321,43 @@ public class StudentSearchFragment extends Fragment implements TechnicalOfficerA
         });
     }
 
+
+    public void fillInDetails(String uid){
+
+        progressDialog.setMessage("Please wait..");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        databaseReference.child("logs").child(uid).child(((String) week.getSelectedItem()).split(" ")[1]).child(((String) day.getSelectedItem())).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                try{
+                    Log log = dataSnapshot.getValue(Log.class);
+
+                    activity.setText(log.getActivity());
+                    comment.setText(log.getComment());
+                }
+                catch(Exception e){
+                    progressDialog.dismiss();
+                    progressDialog.cancel();
+
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage("This student has not filled his log book for this day")
+                            .setCancelable(false)
+                            .setPositiveButton("Okay", null)
+                            .show();
+                }
+
+                progressDialog.dismiss();
+                progressDialog.cancel();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError){
+                progressDialog.dismiss();
+                progressDialog.cancel();
+            }
+        });
+    }
 
 }
