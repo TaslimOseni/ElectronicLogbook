@@ -112,6 +112,10 @@ public class StudentSearchFragment extends Fragment implements TechnicalOfficerA
 
     public void init(View view){
 
+
+        day = view.findViewById(R.id.day);
+        week = view.findViewById(R.id.week);
+
         title = view.findViewById(R.id.title);
 
         landing = view.findViewById(R.id.landing);
@@ -246,11 +250,9 @@ public class StudentSearchFragment extends Fragment implements TechnicalOfficerA
 
                                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
 
-                                day = view.findViewById(R.id.day);
                                 ArrayAdapter arrayAdapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.day, R.layout.short_spinner);
                                 day.setAdapter(arrayAdapter);
 
-                                week = view.findViewById(R.id.week);
                                 ArrayList<String> numb = new ArrayList<>();
                                 numb.add("Week");
                                 for(int i = 1; i <= 8; i++){
