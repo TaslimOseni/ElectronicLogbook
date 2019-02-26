@@ -1,6 +1,7 @@
 package com.dabinu.app.electroniclogbook.technical_officer.fragments;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -63,6 +64,7 @@ public class StudentSearchFragment extends Fragment implements TechnicalOfficerA
     LinearLayout sneakPeak;
     Spinner week, day;
     EditText activity, comment;
+    Activity act;
     boolean bool = false;
     int position = 1;
 
@@ -112,6 +114,7 @@ public class StudentSearchFragment extends Fragment implements TechnicalOfficerA
 
     public void init(View view){
 
+        act = getActivity();
 
         day = view.findViewById(R.id.day);
         week = view.findViewById(R.id.week);
@@ -224,7 +227,7 @@ public class StudentSearchFragment extends Fragment implements TechnicalOfficerA
                         stud_dept.setText(dataSnapshot1.getValue(User.class).getDepartment());
                         stud_faculty.setText(dataSnapshot1.getValue(User.class).getFaculty());
 
-                        Glide.with(getActivity().getApplicationContext()).load(dataSnapshot1.getValue(User.class).getPhoto_url()).into(stud_image);
+                        Glide.with(act.getApplicationContext()).load(dataSnapshot1.getValue(User.class).getPhoto_url()).into(stud_image);
 
                         viewProfile.setOnClickListener(new View.OnClickListener() {
                             @Override
