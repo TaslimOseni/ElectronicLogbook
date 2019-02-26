@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,16 @@ public class HomeFragment extends Fragment {
         signOut = view.findViewById(R.id.signout);
         sout = view.findViewById(R.id.sout);
 
+
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.container, new com.dabinu.app.electroniclogbook.ind_supervisor.fragments.AboutFragment());
+                        fragmentTransaction.commit();
+            }
+        });
 
 
         signOut.setOnClickListener(new View.OnClickListener() {
