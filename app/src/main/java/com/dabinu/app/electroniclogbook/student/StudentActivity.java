@@ -25,8 +25,8 @@ public class StudentActivity extends AppCompatActivity{
 
         Calendar theCalendar = Calendar.getInstance();
 
-        theCalendar.set(Calendar.HOUR_OF_DAY, 16);
-        theCalendar.set(Calendar.MINUTE, 27);
+        theCalendar.set(Calendar.HOUR_OF_DAY, 14);
+        theCalendar.set(Calendar.MINUTE, 00);
         theCalendar.set(Calendar.SECOND, 0);
 
         Intent intent1 = new Intent(StudentActivity.this, AlarmReceiver.class);

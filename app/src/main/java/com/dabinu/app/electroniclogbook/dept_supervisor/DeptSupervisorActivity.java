@@ -24,7 +24,7 @@ public class DeptSupervisorActivity extends AppCompatActivity{
 
         Calendar theCalendar = Calendar.getInstance();
 
-        theCalendar.set(Calendar.HOUR_OF_DAY, 8);
+        theCalendar.set(Calendar.HOUR_OF_DAY, 14);
         theCalendar.set(Calendar.MINUTE, 0);
         theCalendar.set(Calendar.SECOND, 0);
 
