@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment {
 
         progressDialog = new ProgressDialog(getActivity());
 
-        students = view.findViewById(R.id.student);
+        students = view.findViewById(R.id.students);
         stud = view.findViewById(R.id.stud);
 
         profile = view.findViewById(R.id.profile);
