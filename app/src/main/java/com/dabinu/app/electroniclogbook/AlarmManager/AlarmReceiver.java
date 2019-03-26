@@ -25,27 +25,12 @@ public class AlarmReceiver extends BroadcastReceiver implements Serializable{
     @Override
     public void onReceive(Context context, Intent intent){
 
-//        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-//        vibrator.vibrate(2000);
-
         showNotification(context, "Don't forget to fill your logbook today", "", intent);
-
-//        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "jk")
-//                .setSmallIcon(R.drawable.back)
-//                .setContentTitle("Don't forget to fill your logbook today")
-//                .setAutoCancel(true)
-//                .setWhen(System.currentTimeMillis())
-//                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-//                .setVibrate(new long[]{2000});
-//
-//
-//        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-//        mNotificationManager.notify(0, mBuilder.build());
 
     }
 
 
-    public void showNotification(Context context, String title, String body, Intent intent) {
+    public void showNotification(Context context, String title, String body, Intent intent){
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         int notificationId = 1;

@@ -69,18 +69,18 @@ public class HomeFragment extends Fragment {
         sout = view.findViewById(R.id.sout);
 
 
-        students.setOnClickListener(new View.OnClickListener() {
+        students.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
+            public void onClick(View view){
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.container, new com.dabinu.app.electroniclogbook.ind_supervisor.fragments.SearchSupervisorFragment());
                 fragmentTransaction.commit();
             }
         });
 
-        profile.setOnClickListener(new View.OnClickListener() {
+        profile.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
+            public void onClick(View view){
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.container, new com.dabinu.app.electroniclogbook.ind_supervisor.fragments.ProfileFragment());
                 fragmentTransaction.commit();
@@ -88,9 +88,9 @@ public class HomeFragment extends Fragment {
         });
 
 
-        about.setOnClickListener(new View.OnClickListener() {
+        about.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
+            public void onClick(View view){
                         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.container, new com.dabinu.app.electroniclogbook.ind_supervisor.fragments.AboutFragment());
                         fragmentTransaction.commit();

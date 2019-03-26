@@ -3,20 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DDDDDD"
+    android:background="#FFFFFF"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".auth.fragments.WelcomeFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="L"
-        android:textColor="#000000"
+        android:text="LB"
+        android:textColor="#0000FF"
         android:background="@drawable/circle"
         android:gravity="center"
         android:textSize="45sp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp" />
+        android:layout_marginTop="10dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -27,18 +27,63 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Industrial Training"
+            android:text="Obafemi Awolowo University\n Ile-Ife, Osun state"
+            android:textSize="20sp"
+            android:textColor="#666666"
+            android:layout_gravity="center"
             android:textStyle="bold"
-            android:textColor="#111111"
             android:gravity="center"
-            android:textSize="23sp" />
+            android:layout_marginTop="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Obafemi Awolowo University\n Ile-Ife"
+            android:layout_gravity="center"
+            android:text="...."
+            android:textSize="25sp"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Faculty of Technology"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:textColor="#000000"
             android:gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Department of Computer science and Engineering"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="...."
+            android:textSize="25sp"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="SIWES"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:textColor="#666666"
+            android:textStyle="bold"/>
 
 
     </LinearLayout>
@@ -46,44 +91,51 @@
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
 
         <android.support.v7.widget.CardView
-            android:layout_width="150dp"
+            android:layout_width="0dp"
             android:layout_height="40dp"
             android:id="@+id/loginCard"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
             app:cardCornerRadius="10dp"
-            app:cardBackgroundColor="#000000">
+            app:cardBackgroundColor="#FF0000">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="#FFFFFF"
+                android:textColor="#fFFFFF"
+                android:textStyle="bold"
+                android:textSize="18sp"
                 android:text="Log in" />
 
         </android.support.v7.widget.CardView>
 
 
         <android.support.v7.widget.CardView
-            android:layout_width="150dp"
+            android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
             app:cardCornerRadius="10dp"
             android:id="@+id/signupCard"
-            app:cardBackgroundColor="#000000">
+            app:cardBackgroundColor="#0000ff">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="18sp"
                 android:text="Sign up" />
 
         </android.support.v7.widget.CardView>
