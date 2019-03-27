@@ -53,9 +53,9 @@ public class HomeFragment extends Fragment implements TechnicalOfficerActivity.I
         view.findViewById(R.id.sup).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.container, new SupervisorSearchFragment());
-                fragmentTransaction.commit();
+//                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.container, new SupervisorSearchFragment());
+//                fragmentTransaction.commit();
             }
         });
 
