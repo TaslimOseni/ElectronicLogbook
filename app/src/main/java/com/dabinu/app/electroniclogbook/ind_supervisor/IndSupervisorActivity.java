@@ -15,7 +15,7 @@ import com.dabinu.app.electroniclogbook.student.fragments.HomeFragment;
 
 import java.util.Calendar;
 
-public class IndSupervisorActivity extends AppCompatActivity {
+public class IndSupervisorActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

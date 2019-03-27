@@ -53,7 +53,7 @@ public class SupervisorSearchFragment extends Fragment implements TechnicalOffic
     CircleImageView stud_image;
     Activity activity;
     DatabaseReference databaseReference;
-    boolean bool = false;
+    boolean bool = false, gothereatall = false;
     int posit = 1;
 
 
@@ -180,6 +180,8 @@ public class SupervisorSearchFragment extends Fragment implements TechnicalOffic
 
                 for(final DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
 
+                    gothereatall = true;
+
                     if(!dataSnapshot1.getValue(User.class).getType().equals(Constants.STUDENT) && ((dataSnapshot1.getValue(User.class).getStaffID()).toLowerCase()).equals((id.toLowerCase()))){
 
                         progressDialog.dismiss();
@@ -214,7 +216,7 @@ public class SupervisorSearchFragment extends Fragment implements TechnicalOffic
 
                 }
 
-                if(!bool){
+                if(!bool && gothereatall){
                     progressDialog.cancel();
                     progressDialog.dismiss();
                     new AlertDialog.Builder(getActivity())
