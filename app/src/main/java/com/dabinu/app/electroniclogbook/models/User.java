@@ -12,6 +12,7 @@ public class User{
     }
 
 
+    //Student Supervisor
     public User(String type, String fullname, String email, String matric, String level, String faculty, String department, String filledPlacement, String photo_url, String supervisor_id, String extra){
         this.type = type;
         this.fullname = fullname;
@@ -25,6 +26,7 @@ public class User{
         this.supervisor_id = supervisor_id;
     }
 
+    //Departmental Supervisor
     public User(String type, String fullname, String email, String faculty, String department, String staffID, String photo_url){
         this.type = type;
         this.fullname = fullname;
@@ -35,6 +37,7 @@ public class User{
         this.photo_url = photo_url;
     }
 
+    //Industrial Supervisor
     public User(String type, String fullname, String email, String phone, String rank, String staffId, String plusOne, String extraOne, String extraTwo, String photo_url){
         this.type = type;
         this.fullname = fullname;
